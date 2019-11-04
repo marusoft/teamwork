@@ -1,0 +1,40 @@
+{
+  "name": "teamwork",
+  "version": "1.0.0",
+  "description": "Teamwork is an ​ internal social network for employees of an organization.",
+  "main": "app.js",
+  "scripts": {
+    "start:dev": "nodemon --exec babel-node app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marusoft/teamwork.git"
+  },
+  "keywords": [
+    "teamwork",
+    "es6"
+  ],
+  "author": "alimi kehinde m",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marusoft/teamwork/issues"
+  },
+  "homepage": "https://github.com/marusoft/teamwork#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/register": "^7.6.2",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "nodemon": "^1.19.4"
+  }
+}
