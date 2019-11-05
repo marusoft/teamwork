@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({
 
 
 app.get('*', (req, res) => res.status(200).send({
-  message: 'Welcome to teamwork-app, a place where beautiful things can be achieved',
+  message: 'Welcome to teamwork-app, a place where beautiful things can be achieved through collaboration',
 }));
 
 
