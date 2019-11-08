@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 
 
 const app = express();
-const port = parseInt(process.env.PORT, 10) || 1515;
+const port = parseInt(process.env.PORT, 10) || 2020;
 
 app.use(logger('dev'));
 

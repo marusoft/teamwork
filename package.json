@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start:dev": "nodemon --exec babel-node app",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "babel-node ./backend/database/migrations/createTables"
   },
   "repository": {
     "type": "git",
