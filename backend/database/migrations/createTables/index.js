@@ -3,7 +3,7 @@ import createGifsTable from './gifs';
 import createArticlesTable from './articles';
 import createGifsCommentTable from './gifsComment';
 import createArticlesCommentTable from './articlesComment';
-// import insertAllToTables from '../seed/seed';
+import insertAllToTables from '../../seeders/seeds';
 
 
 (async () => {
@@ -13,7 +13,7 @@ import createArticlesCommentTable from './articlesComment';
     await createArticlesTable();
     await createGifsCommentTable();
     await createArticlesCommentTable();
-    // await insertAllToTables();
+    await insertAllToTables();
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error);

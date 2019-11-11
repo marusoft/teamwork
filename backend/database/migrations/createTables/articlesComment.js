@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS articlescomment CASCADE;
 
 
 /**
- * Function representing CarsTableHandler
+ * Function representing ArticlesCommentTableHandler
  * @returns {object} representing sucess or failure
  */
 async function createArticlesCommentTable() {

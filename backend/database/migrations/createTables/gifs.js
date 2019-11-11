@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS gifs CASCADE;
   )`;
 
 /**
- * Function representing UserTableHandler
+ * Function representing GifsTableHandler
  * @returns {object} representing sucess or failure
  */
 async function createGifsTable() {

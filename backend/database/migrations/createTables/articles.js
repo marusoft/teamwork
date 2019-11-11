@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS articles CASCADE;
   )`;
 
 /**
- * Function representing CarsTableHandler
+ * Function representing ArticlesTableHandler
  * @returns {object} representing sucess or failure
  */
 async function createArticlesTable() {
