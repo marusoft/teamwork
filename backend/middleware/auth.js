@@ -94,7 +94,7 @@ class UserAuthentication {
       });
     }
 
-    if (payload.jobRole !== 'admin') {
+    if (payload.jobrole !== 'admin') {
       return res.status(403).json({
         status: 401,
         error: 'Only admin can access this route',
@@ -137,7 +137,7 @@ class UserAuthentication {
       });
     }
 
-    if (payload.jobRole !== 'employee') {
+    if (payload.jobrole !== 'employee') {
       return res.status(403).json({
         status: 401,
         error: 'Only employee can access this route',
