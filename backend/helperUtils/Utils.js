@@ -13,9 +13,12 @@ const salt = +process.env.SALT;
  */
 export default class Helper {
   /**
-   * @method generateToken
-   * @param {string} payload
-   * @returns token
+   * generateToken
+   * @static
+   * @param {object} payload - The request object
+   * @param {object} res - The response object
+   * @return {object} JSON token
+   * @memberof Helper
    */
   static generateToken(payload) {
     const token = jwt.sign(payload, secretKey);
@@ -23,9 +26,12 @@ export default class Helper {
   }
 
   /**
-   * @method verifyToken
-   * @param {string} token
-   * @returns payload
+   * verifyToken
+   * @static
+   * @param {object} token - The request object
+   * @param {object} res - The response object
+   * @return {object} JSON payload
+   * @memberof Helper
    */
   static verifyToken(token) {
     try {
@@ -45,11 +51,14 @@ export default class Helper {
     return bcrypt.hashSync(password, salt);
   }
 
+
   /**
-   * @method verifyPassword
-   * @param {string} password
-   * @param hash
-   * @returns
+   * verifyPassword
+   * @static
+   * @param {object} hashPassword - The request object
+   * @param {object} password - The response object
+   * @return {object} JSON payload
+   * @memberof Helper
    */
   static verifyPassword(hashPassword, password) {
     return bcrypt.compareSync(password, hashPassword);

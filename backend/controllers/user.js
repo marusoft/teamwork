@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import Helper from '../helperUtils/Utils';
 import pool from '../database/dbConnection';
 import { createUser, findIfUserExist } from '../database/queries/sql';
@@ -29,6 +30,7 @@ class Users {
         id,
         firstName,
         lastName,
+        email
       });
       return res.status(201).json({
         status: 'success',
@@ -59,14 +61,20 @@ class Users {
     const value = [email];
     try {
       const { rows } = await pool.query(findIfUserExist, value);
-      const { id, firstName, lastName } = rows[0];
       if (rows[0]) {
         const validPassword = Helper.verifyPassword(rows[0].password, req.body.password);
         if (validPassword) {
+          const {
+            id,
+            firstName,
+            lastName,
+            email
+          } = rows[0];
           const token = Helper.generateToken({
             id,
             firstName,
             lastName,
+            email
           });
           return res.status(200).json({
             status: 'success',
