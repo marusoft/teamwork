@@ -8,14 +8,14 @@ import { createUser, findIfUserExist } from '../database/queries/sql';
  */
 class Users {
   /**
-     * Create User Account
-     * Admin create an employee user account.
-     * @static
-     * @param {object} req - The request object
-     * @param {object} res - The response object
-     * @return {object} JSON representing success message
-     * @memberof Users
-     */
+   * Create User Account
+   * Admin create an employee user account.
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @return {object} JSON representing success message
+   * @memberof Users
+   */
   static async createUsers(req, res) {
     const {
       firstName, lastName, email, password, gender, jobRole, department, address,
@@ -48,14 +48,14 @@ class Users {
   }
 
   /**
-     * Login a user
-     * Admin/Employees can sign in
-     * @static
-     * @param {object} req - The request object
-     * @param {object} res - The response object
-     * @return {object} JSON representing success message
-     * @memberof Users
-     */
+   * Login a user
+   * Admin/Employees can sign in
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @return {object} JSON representing success message
+   * @memberof Users
+   */
   static async loginUsers(req, res) {
     const { email } = req.body;
     const value = [email];
