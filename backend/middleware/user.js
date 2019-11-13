@@ -1,6 +1,6 @@
 import Validator from 'validatorjs';
 import pool from '../database/dbConnection';
-import { findEmail, findIfUserExist } from '../database/queries/sql';
+import { findIfUserExist } from '../database/queries/sql';
 
 /**
  * UsersValidation
@@ -40,7 +40,7 @@ class UsersValidation {
     email = email.toLowerCase().trim();
     try {
       const value = [email];
-      const { rows } = await pool.query(findEmail, value);
+      const { rows } = await pool.query(findIfUserExist, value);
       if (rows[0]) {
         return res.status(409).json({
           status: 409,
