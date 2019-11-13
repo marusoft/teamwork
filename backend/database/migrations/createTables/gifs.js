@@ -4,7 +4,7 @@ import pool from '../../dbConnection';
 const gifsTable = `
 DROP TABLE IF EXISTS gifs CASCADE;
   CREATE TABLE IF NOT EXISTS gifs(
-    id SERIAL PRIMARY KEY NOT NULL,
+    gifId SERIAL PRIMARY KEY NOT NULL,
     gifOwnerId INTEGER NOT NULL,
     title VARCHAR(128) NOT NULL,
     imageUrl TEXT NOT NULL,

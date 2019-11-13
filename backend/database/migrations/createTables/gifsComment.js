@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS gifscomment CASCADE;
     gifsOwnerCommentId INTEGER NOT NULL,
     comment TEXT NOT NULL,
     createdOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (gifsOwnerCommentId) REFERENCES gifs(id) ON DELETE CASCADE
+    FOREIGN KEY (gifsOwnerCommentId) REFERENCES gifs(gifId) ON DELETE CASCADE
   )`;
 
 /**
