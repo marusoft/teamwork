@@ -18,10 +18,10 @@ class Users {
    */
   static async createUsers(req, res) {
     const {
-      firstName, lastName, email, password, gender, jobRole, department, address,
+      username, firstName, lastName, email, password, gender, jobRole, department, address,
     } = req.body;
     const hashedPassword = Helper.hashPassword(password);
-    const values = [firstName, lastName, email, hashedPassword, gender, jobRole,
+    const values = [username, firstName, lastName, email, hashedPassword, gender, jobRole,
       department, address];
     try {
       const { rows } = await pool.query(createUser, values);
@@ -66,19 +66,24 @@ class Users {
         if (validPassword) {
           const {
             id,
+            username,
             firstName,
             lastName,
-            email
+            email,
+            jobrole
           } = rows[0];
           const token = Helper.generateToken({
             id,
+            username,
             firstName,
             lastName,
-            email
+            email,
+            jobrole
           });
           return res.status(200).json({
             status: 'success',
             data: {
+              username,
               message: 'Welcome back your login was successful',
               token,
               id
