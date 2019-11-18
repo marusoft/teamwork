@@ -5,6 +5,7 @@ const usersTable = `
 DROP TABLE IF EXISTS users CASCADE;
   CREATE TABLE IF NOT EXISTS users( 
     id SERIAL PRIMARY KEY NOT NULL,
+    username VARCHAR(128) NOT NULL,
     firstName VARCHAR(128) NOT NULL,
     lastName VARCHAR(128) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,

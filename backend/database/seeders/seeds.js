@@ -9,13 +9,13 @@ const password = process.env.PASSWORD;
 const hashedPassword = Helper.hashPassword(password);
 
 const addAllsqlTableQueries = `
-      INSERT INTO users(firstName, lastName, email, password, gender, jobRole, department, address) 
-      VALUES ('kehinde', 'alimi', 'alimi@automart.com', '${hashedPassword}', 'male', 'admin', 'HR', '3, Olourunosebi street, Oni, Lagos.'),
-             ('moyosore', 'omodada', 'moyosore@automart.com', '${hashedPassword}', 'female', 'employee', 'Engineering' ,'3,Talomoola Street, ajumobi, Lagos.');
+      INSERT INTO users(username, firstName, lastName, email, password, gender, jobRole, department, address) 
+      VALUES ('marusoft' ,'kehinde', 'alimi', 'alimi@automart.com', '${hashedPassword}', 'male', 'admin', 'HR', '3, Olourunosebi street, Oni, Lagos.'),
+             ( 'moyo' ,'moyosore', 'omodada', 'moyosore@automart.com', '${hashedPassword}', 'female', 'employee', 'Engineering' ,'3,Talomoola Street, ajumobi, Lagos.');
 
       INSERT INTO gifs(gifownerId, title, imageUrl) 
-      VALUES ( 2, 'cat developer', 'http://giphygifs.s3.amazonaws.com/media/11JTxkrmq4bGE0/giphy.gif'),
-             ( 1, 'cat developer', 'http://giphygifs.s3.amazonaws.com/media/l9Jhzwdi09Ve0/giphy.gif');
+      VALUES ( 2, 'cat developer', 'http://res.cloudinary.com/marusofteamwork/image/upload/v1573995345/b2j6f4ascsrvvm76ebje.gif'),
+             ( 1, 'cat developer', 'http://res.cloudinary.com/marusofteamwork/image/upload/v1573995345/b2j6f4ascsrvvm76ebje.gif');
       `;
 
 /**
