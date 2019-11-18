@@ -37,7 +37,7 @@ class Users {
         status: 'success',
         data: {
           username,
-          message: 'User account successfully created',
+          message: 'Account successfully created',
           token,
           id
         }

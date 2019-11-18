@@ -10,8 +10,8 @@ const hashedPassword = Helper.hashPassword(password);
 
 const addAllsqlTableQueries = `
       INSERT INTO users(username, firstName, lastName, email, password, gender, jobRole, department, address) 
-      VALUES ('marusoft' ,'kehinde', 'alimi', 'alimi@automart.com', '${hashedPassword}', 'male', 'admin', 'HR', '3, Olourunosebi street, Oni, Lagos.'),
-             ( 'moyo' ,'moyosore', 'omodada', 'moyosore@automart.com', '${hashedPassword}', 'female', 'employee', 'Engineering' ,'3,Talomoola Street, ajumobi, Lagos.');
+      VALUES ('marusoft' ,'kehinde', 'alimi', 'alimi@teamwork.com', '${hashedPassword}', 'male', 'admin', 'HR', '3, Olourunosebi street, Oni, Lagos.'),
+             ( 'moyo' ,'moyosore', 'omodada', 'moyosore@teamwork.com', '${hashedPassword}', 'female', 'employee', 'Engineering' ,'3,Talomoola Street, ajumobi, Lagos.');
 
       INSERT INTO gifs(gifownerId, title, imageUrl) 
       VALUES ( 2, 'cat developer', 'http://res.cloudinary.com/marusofteamwork/image/upload/v1573995345/b2j6f4ascsrvvm76ebje.gif'),
