@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS users CASCADE;
     email VARCHAR(255) UNIQUE NOT NULL,
     password TEXT NOT NULL,
     gender VARCHAR(90) NOT NULL DEFAULT 'male',
-    jobRole VARCHAR(100) NOT NULL DEFAULT 'employee',
+    jobRole VARCHAR(100) NOT NULL DEFAULT 'admin',
     department VARCHAR(128) NOT NULL,
     address VARCHAR(128) NOT NULL
   )`;
