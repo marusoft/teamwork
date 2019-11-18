@@ -18,16 +18,17 @@ class Users {
    */
   static async createUsers(req, res) {
     const {
-      firstName, lastName, email, password, gender, jobRole, department, address,
+      username, firstName, lastName, email, password, gender, jobRole, department, address,
     } = req.body;
     const hashedPassword = Helper.hashPassword(password);
-    const values = [firstName, lastName, email, hashedPassword, gender, jobRole,
+    const values = [username, firstName, lastName, email, hashedPassword, gender, jobRole,
       department, address];
     try {
       const { rows } = await pool.query(createUser, values);
       const { id } = rows[0];
       const token = Helper.generateToken({
         id,
+        username,
         firstName,
         lastName,
         email
@@ -35,6 +36,7 @@ class Users {
       return res.status(201).json({
         status: 'success',
         data: {
+          username,
           message: 'User account successfully created',
           token,
           id
@@ -62,17 +64,19 @@ class Users {
     try {
       const { rows } = await pool.query(findIfUserExist, value);
       if (rows[0]) {
-        console.log('rows[0]', rows[0]);
         const validPassword = Helper.verifyPassword(rows[0].password, req.body.password);
         if (validPassword) {
           const {
             id,
+            username,
             firstName,
             lastName,
+            email,
             jobrole
           } = rows[0];
           const token = Helper.generateToken({
             id,
+            username,
             firstName,
             lastName,
             email,
@@ -81,6 +85,7 @@ class Users {
           return res.status(200).json({
             status: 'success',
             data: {
+              username,
               message: 'Welcome back your login was successful',
               token,
               id
