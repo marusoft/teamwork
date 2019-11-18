@@ -62,19 +62,21 @@ class Users {
     try {
       const { rows } = await pool.query(findIfUserExist, value);
       if (rows[0]) {
+        console.log('rows[0]', rows[0]);
         const validPassword = Helper.verifyPassword(rows[0].password, req.body.password);
         if (validPassword) {
           const {
             id,
             firstName,
             lastName,
-            email
+            jobrole
           } = rows[0];
           const token = Helper.generateToken({
             id,
             firstName,
             lastName,
-            email
+            email,
+            jobrole
           });
           return res.status(200).json({
             status: 'success',

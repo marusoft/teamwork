@@ -69,17 +69,25 @@ class GifsValidation {
    * @memberof Gifs
    */
   static async validateSpecifyGif(req, res, next) {
-    const { id } = req.params;
-    const value = Number(id);
-    const findSpecificGif = await pool.query(findAGif, [value]);
-    if (findSpecificGif.rowCount === 0) {
-      return res.status(404).json({
-        status: 404,
-        error: 'Cannot find the specify gif.',
+    const { gifId } = req.params;
+    const value = Number(gifId);
+    try {
+      const { rows, rowCount } = await pool.query(findAGif, [value]);
+      if (rowCount === 0) {
+        return res.status(404).json({
+          status: 404,
+          error: 'Cannot find the specify gif.',
+        });
+      }
+      const findSpecificGif = rows[0];
+      req.body.findSpecificGif = findSpecificGif;
+      next();
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        error: error.message
       });
     }
-    req.body.findSpecificGif = findSpecificGif.rows[0];
-    return next();
   }
 }
 

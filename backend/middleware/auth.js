@@ -1,5 +1,7 @@
-/* eslint-disable consistent-return */
+/* eslint-disable prefer-destructuring */
 import Helper from '../helperUtils/Utils';
+import pool from '../database/dbConnection';
+import { findAGif } from '../database/queries/sql';
 
 /**
  * @class UserAuthentication
@@ -72,7 +74,6 @@ class UserAuthentication {
     */
   static isAdmin(req, res, next) {
     const payload = UserAuthentication.verifyAuthHeader(req);
-
     let error;
     let status;
 
@@ -96,16 +97,16 @@ class UserAuthentication {
 
     if (payload.jobrole !== 'admin') {
       return res.status(403).json({
-        status: 401,
-        error: 'Only admin can access this route',
+        status: 403,
+        error: 'Only admin can create employee account',
       });
     }
     next();
   }
 
   /**
-    * verify isEmployee
-    * @method isEmployee
+    * verify isOwner
+    * @method isOwner
     * @static
     * @param {object} req - The request object
     * @param {object} res - The response object
@@ -113,37 +114,31 @@ class UserAuthentication {
     * @param {object} next
     * @memberof UserAuthentication
     */
-  static isEmployee(req, res, next) {
-    const payload = UserAuthentication.verifyAuthHeader(req);
+  static async isOwner(req, res, next) {
+    const userid = req.user.id;
+    const gifId = req.params.gifId;
+    const value = Number(gifId);
 
-    let error;
-    let status;
-
-    if (payload && payload.error === 'auth') {
-      status = 401;
-      error = 'No authorization header was specified';
-      return res.status(status).json({
-        status,
-        error,
+    try {
+      const { rows, rowCount } = await pool.query(findAGif, [value]);
+      if (rowCount === 0) {
+        return res.status(404).json({
+          status: 404,
+          error: 'Gif not found',
+        });
+      }
+      if (userid !== rows[0].gifownerid) {
+        return res.status(401).json({
+          status: 401,
+          error: 'You can not access or delete this gif',
+        });
+      }
+      return next();
+    } catch (error) {
+      return res.status(400).json({
+        error: error.message,
       });
     }
-
-    if (payload && payload.error === 'token') {
-      status = 401;
-      error = 'Token provided cannot be authenticated.';
-      return res.status(status).json({
-        status,
-        error,
-      });
-    }
-
-    if (payload.jobrole !== 'employee') {
-      return res.status(403).json({
-        status: 401,
-        error: 'Only employee can access this route',
-      });
-    }
-    next();
   }
 }
 

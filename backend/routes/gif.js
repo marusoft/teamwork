@@ -3,13 +3,14 @@ import Gifs from '../controllers/gif';
 import GifInputValidation from '../middleware/gif';
 import UserAuth from '../middleware/auth';
 
-const { createAGif } = Gifs;
-const { validateGifsDetails } = GifInputValidation;
-const { verifyUserToken } = UserAuth;
+const { createAGif, deleteSelfGif } = Gifs;
+const { validateGifsDetails, validateSpecifyGif } = GifInputValidation;
+const { verifyUserToken, isOwner } = UserAuth;
 
 const gifRouter = express.Router();
 
 gifRouter.post('/gifs', verifyUserToken, validateGifsDetails, createAGif);
+gifRouter.delete('/gifs/:gifId', verifyUserToken, isOwner, validateSpecifyGif, deleteSelfGif);
 
 
 export default gifRouter;
