@@ -71,7 +71,6 @@ class Users {
             username,
             firstName,
             lastName,
-            email,
             jobrole
           } = rows[0];
           const token = Helper.generateToken({
