@@ -5,6 +5,7 @@ import { uploader, cloudinaryConfig } from './backend/config/cloudinaryConfig';
 import { multerUploads, dataUri } from './backend/middleware/multer';
 import userRouter from './backend/routes/user';
 import gifRouter from './backend/routes/gif';
+import articleRouter from './backend/routes/article';
 
 const app = express();
 const port = parseInt(process.env.PORT, 10) || 2020;
@@ -43,6 +44,7 @@ app.post('/api/v1/upload', multerUploads, (req, res) => {
 
 app.use('/api/v1', userRouter);
 app.use('/api/v1', gifRouter);
+app.use('/api/v1', articleRouter);
 
 app.get('*', (req, res) => res.status(200).send({
   message: 'Welcome to teamwork-app, a place where beautiful things can be achieved through collaboration',
