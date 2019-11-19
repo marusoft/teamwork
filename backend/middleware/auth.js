@@ -1,7 +1,7 @@
 /* eslint-disable prefer-destructuring */
 import Helper from '../helperUtils/Utils';
 import pool from '../database/dbConnection';
-import { findAGif } from '../database/queries/sql';
+import { findAGif, findAnArticle } from '../database/queries/sql';
 
 /**
  * @class UserAuthentication
@@ -128,6 +128,43 @@ class UserAuthentication {
         });
       }
       if (userid !== rows[0].gifownerid) {
+        return res.status(401).json({
+          status: 401,
+          error: 'You can not access or delete this gif',
+        });
+      }
+      return next();
+    } catch (error) {
+      return res.status(400).json({
+        error: error.message,
+      });
+    }
+  }
+
+  /**
+    * verify isArticleOwner
+    * @method isArticleOwner
+    * @static
+    * @param {object} req - The request object
+    * @param {object} res - The response object
+    * @return {object} JSON representing success message
+    * @param {object} next
+    * @memberof UserAuthentication
+    */
+  static async isArticleOwner(req, res, next) {
+    const userid = req.user.id;
+    const articleId = req.params.articleId;
+    const value = Number(articleId);
+
+    try {
+      const { rows, rowCount } = await pool.query(findAnArticle, [value]);
+      if (rowCount === 0) {
+        return res.status(404).json({
+          status: 404,
+          error: 'Gif not found',
+        });
+      }
+      if (userid !== rows[0].authorid) {
         return res.status(401).json({
           status: 401,
           error: 'You can not access or delete this gif',

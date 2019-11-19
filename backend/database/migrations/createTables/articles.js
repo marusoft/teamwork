@@ -4,7 +4,7 @@ import pool from '../../dbConnection';
 const articlesTable = `
 DROP TABLE IF EXISTS articles CASCADE;
   CREATE TABLE IF NOT EXISTS articles(
-    id SERIAL PRIMARY KEY NOT NULL,
+    articleId SERIAL PRIMARY KEY NOT NULL,
     authorId INTEGER NOT NULL,
     title VARCHAR(128) NOT NULL,
     article TEXT NOT NULL,

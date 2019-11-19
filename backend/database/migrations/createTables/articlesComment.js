@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS articlescomment CASCADE;
     articleOwnerCommentId INTEGER NOT NULL,
     comment TEXT NOT NULL,
     createdOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (articleOwnerCommentId) REFERENCES articles(id) ON DELETE CASCADE
+    FOREIGN KEY (articleOwnerCommentId) REFERENCES articles(articleId) ON DELETE CASCADE
   )`;
 
 
