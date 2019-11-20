@@ -14,20 +14,21 @@ class UsersValidation {
    */
   static async ValidateCreateUserInput(req, res, next) {
     const {
-      firstName, lastName, password, gender, jobRole, department, address,
+      username, firstName, lastName, password, gender, jobRole, department, address,
     } = req.body;
 
     let { email } = req.body;
 
     const constraint = {
+      username: 'required|min:3|max:20|alpha_num',
       firstName: 'required|min:3|max:20|alpha',
       lastName: 'required|min:3|max:20|alpha',
       email: 'required|email|min:12|max:30',
       password: 'required|min:8|max:14',
-      gender: 'required',
-      jobRole: 'required|min:4|max:10',
-      department: 'required|min:8|max:20',
-      address: 'required',
+      gender: 'required|alpha',
+      jobRole: 'required|min:4|max:10|alpha',
+      department: 'required|min:8|max:20|alpha',
+      address: 'required|string',
     };
 
     const validation = new Validator(req.body, constraint);
@@ -54,6 +55,7 @@ class UsersValidation {
     }
 
     req.body.email = email;
+    req.body.username = username.toLowerCase().trim();
     req.body.firstName = firstName.toLowerCase().trim();
     req.body.lastName = lastName.toLowerCase().trim();
     req.body.password = password.trim();
