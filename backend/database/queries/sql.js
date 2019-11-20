@@ -7,3 +7,4 @@ export const deleteOwnGif = 'DELETE FROM gifs WHERE gifid = $1 returning *';
 
 export const createArticle = 'INSERT INTO articles (authorId, title, article) values ($1, $2, $3) returning *';
 export const findAnArticle = 'SELECT * FROM articles WHERE articleid = $1';
+export const modifyArticle = 'UPDATE articles SET title = $1 , article = $2 WHERE articleId = $3 and authorId = $4 RETURNING *';

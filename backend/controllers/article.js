@@ -1,5 +1,5 @@
 import pool from '../database/dbConnection';
-import { createArticle } from '../database/queries/sql';
+import { createArticle, modifyArticle } from '../database/queries/sql';
 
 
 /**
@@ -43,6 +43,35 @@ class Articles {
       return res.status(500).json({
         status: error,
         error: error.message
+      });
+    }
+  }
+
+  /**
+   * Employees can edit their articles.
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @return {object} JSON representing success message
+   * @memberof Articles
+   */
+  static async editAnArticle(req, res) {
+    const { title, article, findSingleArticle } = req.body;
+    // const { findSingleArticle } = req.body;
+    try {
+      const values = [title, article, findSingleArticle.articleid, req.user.id];
+      const { rows } = await pool.query(modifyArticle, values);
+      return res.status(200).json({
+        status: 'success',
+        data: {
+          message: 'Article successfully updated',
+          rows
+        }
+      });
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        error: error.message,
       });
     }
   }
