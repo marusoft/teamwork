@@ -1,5 +1,5 @@
 import pool from '../database/dbConnection';
-import { createArticle, modifyArticle } from '../database/queries/sql';
+import { createArticle, modifyArticle, deleteOwnArticle } from '../database/queries/sql';
 
 
 /**
@@ -68,6 +68,32 @@ class Articles {
           rows
         }
       });
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        error: error.message,
+      });
+    }
+  }
+
+  /**
+   * Employees can delete their articles.
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @return {object} JSON representing success message
+   * @memberof Articles
+   */
+  static async deleteSelfArticle(req, res) {
+    const { findSingleArticle } = req.body;
+    try {
+      const { rowCount } = await pool.query(deleteOwnArticle, [findSingleArticle.articleid]);
+      if (rowCount !== 0) {
+        return res.status(200).json({
+          status: 200,
+          message: 'Article successfully deleted',
+        });
+      }
     } catch (error) {
       return res.status(400).json({
         status: 400,
