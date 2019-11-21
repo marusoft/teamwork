@@ -4,11 +4,13 @@ import pool from '../../dbConnection';
 const articlesCommentTable = `
 DROP TABLE IF EXISTS articlescomment CASCADE;
   CREATE TABLE IF NOT EXISTS articlescomment(
-    id SERIAL PRIMARY KEY NOT NULL,
+    commentId SERIAL PRIMARY KEY NOT NULL,
     articleOwnerCommentId INTEGER NOT NULL,
+    authorId INTEGER NOT NULL,
     comment TEXT NOT NULL,
     createdOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (articleOwnerCommentId) REFERENCES articles(articleId) ON DELETE CASCADE
+    FOREIGN KEY (articleOwnerCommentId) REFERENCES articles(articleId) ON DELETE CASCADE,
+    FOREIGN KEY (authorId) REFERENCES users(id) ON DELETE CASCADE
   )`;
 
 
