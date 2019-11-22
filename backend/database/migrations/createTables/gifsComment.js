@@ -4,11 +4,13 @@ import pool from '../../dbConnection';
 const gifsCommentTable = `
 DROP TABLE IF EXISTS gifscomment CASCADE;
   CREATE TABLE IF NOT EXISTS gifscomment(
-    id SERIAL PRIMARY KEY NOT NULL,
+    commentId SERIAL PRIMARY KEY NOT NULL,
     gifsOwnerCommentId INTEGER NOT NULL,
+    gifOwnerId INTEGER NOT NULL,
     comment TEXT NOT NULL,
     createdOn TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (gifsOwnerCommentId) REFERENCES gifs(gifId) ON DELETE CASCADE
+    FOREIGN KEY (gifsOwnerCommentId) REFERENCES gifs(gifId) ON DELETE CASCADE,
+    FOREIGN KEY (gifOwnerId) REFERENCES users(id) ON DELETE CASCADE
   )`;
 
 /**

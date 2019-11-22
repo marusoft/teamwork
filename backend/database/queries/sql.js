@@ -10,3 +10,16 @@ export const createArticle = 'INSERT INTO articles (authorId, title, article) va
 export const findAnArticle = 'SELECT * FROM articles WHERE articleid = $1';
 export const modifyArticle = 'UPDATE articles SET title = $1 , article = $2 WHERE articleId = $3 and authorId = $4 RETURNING *';
 export const deleteOwnArticle = 'DELETE FROM articles WHERE articleid = $1 returning *';
+
+export const createCommentForArticle = `
+    WITH inserted AS (
+      INSERT INTO articlescomment (
+        comment,
+        articleOnCommentId,
+        authorid
+      )   VALUES ($1, $2, $3)
+      RETURNING *
+    )
+    SELECT comment, inserted.createdOn, title, article
+    FROM inserted JOIN articles ON inserted.articleOnCommentId = articles.articleid
+    `;

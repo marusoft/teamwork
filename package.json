@@ -14,10 +14,12 @@
   },
   "keywords": [
     "teamwork",
+    "javascript",
     "es6",
     "node",
     "express",
-    "postgresql"
+    "postgresql",
+    "cloudinary"
   ],
   "author": "alimi kehinde m",
   "license": "MIT",

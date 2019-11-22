@@ -1,5 +1,7 @@
 import pool from '../database/dbConnection';
-import { createArticle, modifyArticle, deleteOwnArticle } from '../database/queries/sql';
+import {
+  createArticle, modifyArticle, deleteOwnArticle, createCommentForArticle
+} from '../database/queries/sql';
 
 
 /**
@@ -57,7 +59,6 @@ class Articles {
    */
   static async editAnArticle(req, res) {
     const { title, article, findSingleArticle } = req.body;
-    // const { findSingleArticle } = req.body;
     try {
       const values = [title, article, findSingleArticle.articleid, req.user.id];
       const { rows } = await pool.query(modifyArticle, values);
@@ -98,6 +99,42 @@ class Articles {
       return res.status(400).json({
         status: 400,
         error: error.message,
+      });
+    }
+  }
+
+  /**
+   * Employees can comment on other colleagues' article post.
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @return {object} JSON representing success message
+   * @memberof Articles
+   */
+  static async createArticleComment(req, res) {
+    const { id } = req.user;
+    const { findSingleArticle } = req.body;
+    try {
+      const values = [req.body.comment, findSingleArticle.articleid, id];
+      const { rows } = await pool.query(createCommentForArticle, values);
+      const articleTitle = findSingleArticle.title;
+      const {
+        createdon, comment, article
+      } = rows[0];
+      return res.status(201).json({
+        status: 'success',
+        data: {
+          message: 'Comment successfully created',
+          createdon,
+          articleTitle,
+          article,
+          comment
+        }
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: error,
+        error: error.message
       });
     }
   }
