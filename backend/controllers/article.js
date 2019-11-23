@@ -1,6 +1,7 @@
 import pool from '../database/dbConnection';
 import {
-  createArticle, modifyArticle, deleteOwnArticle, createCommentForArticle
+  createArticle, modifyArticle, deleteOwnArticle, createCommentForArticle,
+  getSingleArticle, getSingleArticleComments
 } from '../database/queries/sql';
 
 
@@ -129,6 +130,49 @@ class Articles {
           articleTitle,
           article,
           comment
+        }
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: error,
+        error: error.message
+      });
+    }
+  }
+
+  /**
+   * Employees can view a specific article.
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @return {object} JSON representing success message
+   * @memberof Articles
+   */
+  static async viewSpecificArticle(req, res) {
+    const { articleId } = req.params;
+    const value = Number(articleId);
+    try {
+      const { rows, rowCount } = await pool.query(getSingleArticle, [value]);
+      if (rowCount === 0) {
+        return res.status(404).json({
+          status: 404,
+          error: 'Cannot find the specify article.',
+        });
+      }
+      const {
+        id, createdon, title, article
+      } = rows[0];
+      const foundComment = await pool.query(getSingleArticleComments, [value]);
+      const comments = foundComment.rows.map((comment) => comment);
+      return res.status(201).json({
+        status: 'success',
+        data: {
+          id,
+          createdon,
+          title,
+          article,
+          comments
+
         }
       });
     } catch (error) {
