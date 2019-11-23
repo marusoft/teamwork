@@ -1,5 +1,7 @@
 import pool from '../database/dbConnection';
-import { createGif, deleteOwnGif } from '../database/queries/sql';
+import {
+  createGif, deleteOwnGif, createCommentForGifs
+} from '../database/queries/sql';
 
 /**
  * @class Gifs
@@ -69,7 +71,42 @@ class Gifs {
       });
     }
   }
-}
 
+  /**
+   * Employees can comment on other colleagues' gif post.
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @return {object} JSON representing success message
+   * @memberof Gifs
+   */
+  static async createGifComment(req, res) {
+    const { id } = req.user;
+    const { findSpecificGif } = req.body;
+    try {
+      const values = [req.body.comment, findSpecificGif.gifid, id];
+      const { rows } = await pool.query(createCommentForGifs, values);
+      const gifTitle = findSpecificGif.title;
+      const {
+        createdon, comment, imageUrl
+      } = rows[0];
+      return res.status(201).json({
+        status: 'success',
+        data: {
+          message: 'Comment successfully created',
+          createdon,
+          gifTitle,
+          imageUrl,
+          comment
+        }
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: error,
+        error: error.message
+      });
+    }
+  }
+}
 
 export default Gifs;
