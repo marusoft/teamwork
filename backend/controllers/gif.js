@@ -1,6 +1,6 @@
 import pool from '../database/dbConnection';
 import {
-  createGif, deleteOwnGif, createCommentForGifs
+  createGif, deleteOwnGif, createCommentForGifs, getSingleGif, getSingleGifComments
 } from '../database/queries/sql';
 
 /**
@@ -88,7 +88,7 @@ class Gifs {
       const { rows } = await pool.query(createCommentForGifs, values);
       const gifTitle = findSpecificGif.title;
       const {
-        createdon, comment, imageUrl
+        createdon, comment, imageurl
       } = rows[0];
       return res.status(201).json({
         status: 'success',
@@ -96,8 +96,51 @@ class Gifs {
           message: 'Comment successfully created',
           createdon,
           gifTitle,
-          imageUrl,
+          imageurl,
           comment
+        }
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: error,
+        error: error.message
+      });
+    }
+  }
+
+  /**
+   * Employees can view a specific article.
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @return {object} JSON representing success message
+   * @memberof Articles
+   */
+  static async viewSpecificGif(req, res) {
+    const { gifId } = req.params;
+    const value = Number(gifId);
+    try {
+      const { rows, rowCount } = await pool.query(getSingleGif, [value]);
+      if (rowCount === 0) {
+        return res.status(404).json({
+          status: 404,
+          error: 'Cannot find the specify article.',
+        });
+      }
+      const {
+        id, createdon, title, imageurl
+      } = rows[0];
+      const foundComment = await pool.query(getSingleGifComments, [value]);
+      const comments = foundComment.rows.map((comment) => comment);
+      return res.status(201).json({
+        status: 'success',
+        data: {
+          id,
+          createdon,
+          title,
+          imageurl,
+          comments
+
         }
       });
     } catch (error) {
