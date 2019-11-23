@@ -8,6 +8,23 @@ export const createGif = 'INSERT INTO gifs (gifOwnerId, title, imageUrl) values 
 export const findAGif = 'SELECT * FROM gifs WHERE gifid = $1';
 export const deleteOwnGif = 'DELETE FROM gifs WHERE gifid = $1 returning *';
 
+export const createCommentForGifs = `
+    WITH inserted AS (
+      INSERT INTO gifscomment (
+        comment,
+        gifsOnCommentId,
+        gifownerid
+      )   VALUES ($1, $2, $3)
+      RETURNING *
+    )
+    SELECT comment, inserted.createdOn, title, imageUrl
+    FROM inserted JOIN gifs ON inserted.gifsOnCommentId = gifs.gifid
+    `;
+
+export const getSingleGif = 'SELECT createdon, title, imageUrl FROM gifs WHERE gifid = $1';
+
+export const getSingleGifComments = 'SELECT commentid, comment, gifownerid FROM gifscomment WHERE gifsoncommentid = $1';
+
 // ARTICLES
 export const createArticle = 'INSERT INTO articles (authorId, title, article) values ($1, $2, $3) returning *';
 export const findAnArticle = 'SELECT * FROM articles WHERE articleid = $1';
