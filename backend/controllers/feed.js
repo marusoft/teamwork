@@ -21,7 +21,6 @@ class Feed {
     const value = [id];
     try {
       const foundFeed = await pool.query(viewAllArticlesOrGifs, value);
-      // console.log('foundFeed', foundFeed);
       const data = foundFeed.rows.map((feed) => (
         {
           id: feed.id,
