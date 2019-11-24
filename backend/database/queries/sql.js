@@ -26,9 +26,9 @@ export const getSingleGif = 'SELECT createdon, title, imageUrl FROM gifs WHERE g
 export const getSingleGifComments = 'SELECT commentid, comment, gifownerid FROM gifscomment WHERE gifsoncommentid = $1';
 
 // ARTICLES
-export const createArticle = 'INSERT INTO articles (authorId, title, article) values ($1, $2, $3) returning *';
+export const createArticle = 'INSERT INTO articles (authorId, title, article, category) values ($1, $2, $3, $4) returning *';
 export const findAnArticle = 'SELECT * FROM articles WHERE articleid = $1';
-export const modifyArticle = 'UPDATE articles SET title = $1 , article = $2 WHERE articleId = $3 and authorId = $4 RETURNING *';
+export const modifyArticle = 'UPDATE articles SET title = $1 , article = $2, category = $3 WHERE articleId = $4 and authorId = $5 RETURNING *';
 export const deleteOwnArticle = 'DELETE FROM articles WHERE articleid = $1 returning *';
 
 export const createCommentForArticle = `
@@ -40,11 +40,11 @@ export const createCommentForArticle = `
       )   VALUES ($1, $2, $3)
       RETURNING *
     )
-    SELECT comment, inserted.createdOn, title, article
+    SELECT comment, inserted.createdOn, title, article, category 
     FROM inserted JOIN articles ON inserted.articleOnCommentId = articles.articleid
     `;
 
-export const getSingleArticle = 'SELECT createdon, title, article FROM articles WHERE articleid = $1';
+export const getSingleArticle = 'SELECT createdon, title, article, category FROM articles WHERE articleid = $1';
 
 export const getSingleArticleComments = 'SELECT commentid, comment, authorid FROM articlescomment WHERE articleoncommentid = $1';
 
@@ -71,3 +71,6 @@ export const viewAllArticlesOrGifs = `
     WHERE gifid = $1
     ORDER BY createdon ASC;
   `;
+
+export const articlesByCategory = 'SELECT * FROM articles WHERE category = $1';
+export const allarticles = 'SELECT * FROM articles';
