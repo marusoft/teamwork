@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start:dev": "nodemon --exec babel-node app",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env NODE_ENV=test npm run migrate && cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --timeout 1000 ./backend/tests/*.js --require @babel/register --exit",
     "migrate": "babel-node ./backend/database/migrations/createTables"
   },
   "repository": {
