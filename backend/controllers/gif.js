@@ -1,4 +1,5 @@
 import pool from '../database/dbConnection';
+// import { uploader, cloudinaryConfig } from '../config/cloudinaryConfig';
 import {
   createGif, deleteOwnGif, createCommentForGifs, getSingleGif, getSingleGifComments
 } from '../database/queries/sql';

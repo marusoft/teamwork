@@ -61,9 +61,11 @@ class Articles {
    * @memberof Articles
    */
   static async editAnArticle(req, res) {
-    const { title, article, findSingleArticle } = req.body;
+    const {
+      title, article, category, findSingleArticle
+    } = req.body;
     try {
-      const values = [title, article, findSingleArticle.articleid, req.user.id];
+      const values = [title, article, category, findSingleArticle.articleid, req.user.id];
       const { rows } = await pool.query(modifyArticle, values);
       return res.status(200).json({
         status: 'success',
@@ -122,7 +124,7 @@ class Articles {
       const { rows } = await pool.query(createCommentForArticle, values);
       const articleTitle = findSingleArticle.title;
       const {
-        createdon, comment, article
+        createdon, comment, article, category
       } = rows[0];
       return res.status(201).json({
         status: 'success',
@@ -131,6 +133,7 @@ class Articles {
           createdon,
           articleTitle,
           article,
+          category,
           comment
         }
       });
