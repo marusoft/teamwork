@@ -1,7 +1,7 @@
 import pool from '../database/dbConnection';
 import {
   createArticle, modifyArticle, deleteOwnArticle, createCommentForArticle,
-  getSingleArticle, getSingleArticleComments
+  getSingleArticle, getSingleArticleComments, articlesByCategory, allarticles
 } from '../database/queries/sql';
 
 
@@ -25,11 +25,12 @@ class Articles {
       id,
       req.body.title,
       req.body.article,
+      req.body.category
     ];
     try {
       const { rows } = await pool.query(createArticle, values);
       const {
-        articleid, authorid, title, article, createdon
+        articleid, authorid, title, article, category, createdon
       } = rows[0];
       return res.status(201).json({
         status: 'success',
@@ -39,6 +40,7 @@ class Articles {
           authorid,
           title,
           article,
+          category,
           createdon
         }
       });
@@ -160,7 +162,7 @@ class Articles {
         });
       }
       const {
-        id, createdon, title, article
+        id, createdon, title, article, category
       } = rows[0];
       const foundComment = await pool.query(getSingleArticleComments, [value]);
       const comments = foundComment.rows.map((comment) => comment);
@@ -171,6 +173,7 @@ class Articles {
           createdon,
           title,
           article,
+          category,
           comments
 
         }
@@ -179,6 +182,60 @@ class Articles {
       return res.status(500).json({
         status: error,
         error: error.message
+      });
+    }
+  }
+
+  /**
+   * Employees can view all articles that belong to
+   * a category (tag).
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @param {object} next - The next object
+   * @return {object} JSON representing success message
+   * @memberof Articles
+   */
+  static async getArticlesByCategory(req, res, next) {
+    const { category } = req.query;
+    if (category) {
+      try {
+        const value = [category];
+        const foundArticlesByCategory = await pool.query(articlesByCategory, value);
+        return res.status(200).json({
+          status: 'success',
+          data:
+          foundArticlesByCategory.rows
+        });
+      } catch (error) {
+        return res.status(500).json({
+          status: error,
+          error: error.message
+        });
+      }
+    }
+    return next();
+  }
+
+  /**
+   * Employees can view all articles
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @param {object} next - The next object
+   * @return {object} JSON representing success message
+   * @memberof Articles
+   */
+  static async ViewAllPostedArticles(req, res) {
+    try {
+      const { rows } = await pool.query(allarticles);
+      return res.status(200).json({
+        status: 'Success',
+        data: rows,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        error: error.message,
       });
     }
   }
