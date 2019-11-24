@@ -47,3 +47,27 @@ export const createCommentForArticle = `
 export const getSingleArticle = 'SELECT createdon, title, article FROM articles WHERE articleid = $1';
 
 export const getSingleArticleComments = 'SELECT commentid, comment, authorid FROM articlescomment WHERE articleoncommentid = $1';
+
+// FEED
+export const viewAllArticlesOrGifs = `
+    SELECT
+      articleid AS id,
+      createdon,
+      title,
+      article AS feedcontent,
+      authorid AS authorId,
+      'article' AS type
+    FROM articles
+    WHERE authorid = $1
+    UNION
+    SELECT
+      gifid AS id,
+      createdon,
+      title,
+      imageurl AS feedcontent,
+      gifownerid AS authorId,
+      'gif' AS type
+    FROM gifs
+    WHERE gifid = $1
+    ORDER BY createdon ASC;
+  `;
