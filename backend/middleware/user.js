@@ -93,7 +93,7 @@ class UsersValidation {
       if (!rows[0]) {
         return res.status(401).json({
           status: 401,
-          error: 'User does not exist, Please contact an admin for account registration ',
+          error: 'User does not exist, Please contact an admin for account registration',
         });
       }
       password = password.trim();
