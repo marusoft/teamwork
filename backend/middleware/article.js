@@ -24,6 +24,7 @@ class ArticlesValidation {
     const constraint = {
       title: 'required|min:3|max:80|string',
       article: 'required|min:10|max:1000|string',
+      category: 'required|min:5|max:100|string',
     };
 
     const validation = new Validator(req.body, constraint);

@@ -49,7 +49,7 @@ class GifsValidation {
       const validImageExtentions = ['jpg', 'jpeg', 'png', 'gif'];
       if (!validImageExtentions.includes(imgExtention)) {
         return res.status(400).json({
-          message: 'This image is not a valid image'
+          message: 'This image is not a valid image.'
         });
       }
     }
