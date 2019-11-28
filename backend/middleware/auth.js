@@ -124,13 +124,13 @@ class UserAuthentication {
       if (rowCount === 0) {
         return res.status(404).json({
           status: 404,
-          error: 'Gif not found',
+          error: 'Gif not found.',
         });
       }
       if (userid !== rows[0].gifownerid) {
         return res.status(401).json({
           status: 401,
-          error: 'You can not access or delete this gif',
+          error: 'You can not access or delete this gif.',
         });
       }
       return next();
@@ -161,13 +161,13 @@ class UserAuthentication {
       if (rowCount === 0) {
         return res.status(404).json({
           status: 404,
-          error: 'Article not found',
+          error: 'Article not found.',
         });
       }
       if (userid !== rows[0].authorid) {
         return res.status(401).json({
           status: 401,
-          error: 'You can not modify or delete this article',
+          error: 'You can not modify or delete this article.',
         });
       }
       return next();

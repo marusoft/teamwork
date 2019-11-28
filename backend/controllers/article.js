@@ -70,7 +70,7 @@ class Articles {
       return res.status(200).json({
         status: 'success',
         data: {
-          message: 'Article successfully updated',
+          message: 'Article successfully updated.',
           rows
         }
       });
@@ -97,7 +97,7 @@ class Articles {
       if (rowCount !== 0) {
         return res.status(200).json({
           status: 200,
-          message: 'Article successfully deleted',
+          message: 'Article successfully deleted.',
         });
       }
     } catch (error) {
@@ -129,7 +129,7 @@ class Articles {
       return res.status(201).json({
         status: 'success',
         data: {
-          message: 'Comment successfully created',
+          message: 'Comment successfully created.',
           createdon,
           articleTitle,
           article,
@@ -169,7 +169,7 @@ class Articles {
       } = rows[0];
       const foundComment = await pool.query(getSingleArticleComments, [value]);
       const comments = foundComment.rows.map((comment) => comment);
-      return res.status(201).json({
+      return res.status(200).json({
         status: 'success',
         data: {
           id,

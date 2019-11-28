@@ -4,8 +4,14 @@
   "description": "Teamwork is an ​ internal social network for employees of an organization.",
   "main": "app.js",
   "scripts": {
+    "build": "npm run clean && npm run build-babel",
+    "build-babel": "babel ./server -d build",
+    "clean": "rm -rf build .nyc_output coverage && mkdir build",
+    "start": "npm run build && node ./build/app.js",
     "start:dev": "nodemon --exec babel-node app",
     "test": "cross-env NODE_ENV=test npm run migrate && cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --timeout 1000 ./backend/tests/*.js --require @babel/register --exit",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "migrate": "babel-node ./backend/database/migrations/createTables"
   },
   "repository": {
@@ -43,6 +49,7 @@
     "nyc": "^14.1.1",
     "path": "^0.12.7",
     "pg": "^7.12.1",
+    "sinon": "^7.5.0",
     "validatorjs": "^3.17.1"
   },
   "devDependencies": {

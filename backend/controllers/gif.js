@@ -1,5 +1,4 @@
 import pool from '../database/dbConnection';
-// import { uploader, cloudinaryConfig } from '../config/cloudinaryConfig';
 import {
   createGif, deleteOwnGif, createCommentForGifs, getSingleGif, getSingleGifComments
 } from '../database/queries/sql';
@@ -61,7 +60,7 @@ class Gifs {
       const { rowCount } = await pool.query(deleteOwnGif, [findSpecificGif.gifid]);
       if (rowCount !== 0) {
         return res.status(200).json({
-          status: 200,
+          status: 'success',
           message: 'gif post successfully deleted',
         });
       }
@@ -94,7 +93,7 @@ class Gifs {
       return res.status(201).json({
         status: 'success',
         data: {
-          message: 'Comment successfully created',
+          message: 'Comment successfully created.',
           createdon,
           gifTitle,
           imageurl,
@@ -133,7 +132,7 @@ class Gifs {
       } = rows[0];
       const foundComment = await pool.query(getSingleGifComments, [value]);
       const comments = foundComment.rows.map((comment) => comment);
-      return res.status(201).json({
+      return res.status(200).json({
         status: 'success',
         data: {
           id,
