@@ -1,15 +1,19 @@
 import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
+import swaggerUi from 'swagger-ui-express';
 import { cloudinaryConfig } from './backend/config/cloudinaryConfig';
 import userRouter from './backend/routes/user';
 import gifRouter from './backend/routes/gif';
 import articleRouter from './backend/routes/article';
 import feedRouter from './backend/routes/feed';
 import imgRouter from './backend/routes/upload';
+import swaggerDocument from './Swagger';
 
 const app = express();
 const port = parseInt(process.env.PORT, 10) || 2020;
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(logger('dev'));
 
