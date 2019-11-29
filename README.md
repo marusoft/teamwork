@@ -16,7 +16,7 @@ Teamwork is an ​ internal social network for employees of an organization. The
 
 ## Features
 Below are the teamwork features app
-###  Users
+###  Admin/Employees
 
 - Admin can create an employee user account. <br/>
 - Admin/Employees can sign in.<br/>
@@ -67,13 +67,13 @@ cd teamwork
 ```
 npm install
 ```
-4. Create a .env file in the root directory and setup your database credentials and token key. Check .env.sample for instruction.
+4. Create a .env file in the root directory and setup your database credentials and token key. Check `.env.example` for instruction.
 
 5. Start the application by running
 ```
 npm run start:dev
 ```
-6. Install postman to test all endpoints
+6. Install `postman` to test all endpoints
 
 ## Testing
 - run test using `npm run test`    
