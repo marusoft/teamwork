@@ -83,33 +83,35 @@ npm run start:dev
 <table>
 <tr><th>HTTP VERB</th><th>ENDPOINT</th><th>FUNCTIONALITY</th></tr>
 
-`<tr><td>POST</td> <td>api/v1/auth/create-user</td>  <td>Create a user</td></tr>`
+<tr><td>POST</td> <td>api/v1/auth/create-user</td>  <td>Create a user</td></tr>
 
-`<tr><td>POST</td> <td>api/v1/auth/signin</td>  <td>Login a user</td></tr>`
+<tr><td>POST</td> <td>api/v1/auth/signin</td>  <td>Login a user</td></tr>
 
-`<tr><td>POST</td> <td>api/v1/gifs</td>  <td>Employees can post gifs.</td></tr>`
+<tr><td>POST</td> <td>api/v1/gifs</td>  <td>Employees can post gifs.</td></tr>
 
-`<tr><td>DELETE</td> <td>api/v1/gifs/<:gifId></td>  <td>Employees can delete their gifs post.</td></tr>`
+<tr><td>DELETE</td> <td>api/v1/gifs/<:gifId></td>  <td>Employees can delete their gifs post.</td></tr>
 
-`<tr><td>POST</td> <td>api/v1/gifs/<:gifId>/comment</td>  <td>Employees can comment on other colleagues' gif post.</td></tr>`
+<tr><td>POST</td> <td>api/v1/gifs/<:gifId>/comment</td>  <td>Employees can comment on other colleagues' gif post.</td></tr>
 
-`<tr><td>GET</td> <td>api/v1/gifs/<:gifId></td>  <td>Employees can view a specific gif post.</td></tr>`
+<tr><td>GET</td> <td>api/v1/gifs/<:gifId></td>  <td>Employees can view a specific gif post.</td></tr>
 
-`<tr><td>POST</td> <td>api/v1/articles</td>  <td>Employees can write and post articles.</td></tr>`
+<tr><td>POST</td> <td>api/v1/articles</td>  <td>Employees can write and post articles.</td></tr>
 
-`<tr><td>DELETE</td> <td>api/v1/articles/<:articleId></td>  <td>Employees can delete their articles.</td></tr>`
+<tr><td>DELETE</td> <td>api/v1/articles/<:articleId></td>  <td>Employees can delete their articles.</td></tr>
 
-`<tr><td>POST</td> <td>api/v1/articles/<:articleId/comment</td>  <td>Employees can comment on other colleagues' article post.</td></tr>`
+<tr><td>POST</td> <td>api/v1/articles/<:articleId/comment</td>  <td>Employees can comment on other colleagues' article post.</td></tr>
 
-`<tr><td>GET</td> <td>api/v1/articles/<:articleId></td>  <td>Employees can view a specific article post.</td></tr>`
+<tr><td>GET</td> <td>api/v1/articles/<:articleId></td>  <td>Employees can view a specific article post.</td></tr>
 
-`<tr><td>PATCH</td> <td>api/v1/articles/<:articleId></td>  <td>Employees can edit their articles.</td></tr>`
+<tr><td>PATCH</td> <td>api/v1/articles/<:articleId></td>  <td>Employees can edit their articles.</td></tr>
 
-`<tr><td>GET</td> <td>api/v1/articles?category=category></td>  <td>Employees can view all articles that belong to a category (tag).</td></tr>`
+<tr><td>GET</td> <td>api/v1/articles?category=category></td>  <td>Employees can view all articles that belong to a category (tag).</td></tr>
 
-`<tr><td>GET</td> <td>api/v1/articles</td>  <td>Employees can view all articles.</td></tr>`
+<tr><td>GET</td> <td>api/v1/articles</td>  <td>Employees can view all articles.</td></tr>
 
-`<tr><td>GET</td> <td>api/v1/feed</td> <td>Employees can view all articles and gifs, showing the most recently posted articles or gifs first.</td></tr>`
+<tr><td>GET</td> <td>api/v1/feed</td> <td>Employees can view all articles and gifs, showing the most recently posted articles or gifs first.</td></tr>
+<table>
 
-## Author 
+## Author
+
 - Alimi Kehinde Morufudeen 
