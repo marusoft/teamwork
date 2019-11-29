@@ -1,7 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 // import sinon from 'sinon';
-import app from '../../app';
+import app from '../app';
 // import pool from '../database/dbConnection';
 
 import { validArticlesDetails, invalidArticlesDetails } from './mocks/article';
