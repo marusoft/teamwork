@@ -33,6 +33,7 @@ class Users {
         lastName,
         email
       });
+      console.log('res', res.body.data.token);
       return res.status(201).json({
         status: 'success',
         data: {
