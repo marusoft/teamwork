@@ -6,6 +6,10 @@
 # teamwork
 Teamwork is an ​ internal social network for employees of an organization. The goal of this application is to facilitate more interaction between colleagues and promote team bonding.
 
+<br/><b> Heroku: </b> https://teamwork-capstone-project.herokuapp.com/api/v1
+<br/><b> API documentation: </b> https://teamwork-capstone-project.herokuapp.com/api-docs/
+
+
 ## Table of Content
 
  [Features](#features)<br>
