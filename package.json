@@ -25,7 +25,8 @@
     "node",
     "express",
     "postgresql",
-    "cloudinary"
+    "cloudinary",
+    "heroku"
   ],
   "author": "alimi kehinde m",
   "license": "MIT",
