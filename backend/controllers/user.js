@@ -33,7 +33,7 @@ class Users {
         lastName,
         email
       });
-      console.log('RESPONSE', response.body);
+      console.log('RESPONSE', response);
       return response.status(201).json({
         status: 'success',
         data: {
@@ -43,7 +43,6 @@ class Users {
           id
         }
       });
-      
     } catch (error) {
       return response.status(500).json({
         error: error.message
