@@ -12,11 +12,11 @@ class Users {
    * Admin create an employee user account.
    * @static
    * @param {object} req - The request object
-   * @param {object} response - The response object
+   * @param {object} res - The response object
    * @return {object} JSON representing success message
    * @memberof Users
    */
-  static async createUsers(req, response) {
+  static async createUsers(req, res) {
     const {
       username, firstName, lastName, email, password, gender, jobRole, department, address,
     } = req.body;
@@ -33,8 +33,7 @@ class Users {
         lastName,
         email
       });
-      console.log('RESPONSE', response);
-      return response.status(201).json({
+      return res.status(201).json({
         status: 'success',
         data: {
           username,
@@ -44,7 +43,7 @@ class Users {
         }
       });
     } catch (error) {
-      return response.status(500).json({
+      return res.status(500).json({
         error: error.message
       });
     }
@@ -55,11 +54,11 @@ class Users {
    * Admin/Employees can sign in
    * @static
    * @param {object} req - The request object
-   * @param {object} response - The response object
+   * @param {object} res - The response object
    * @return {object} JSON representing success message
    * @memberof Users
    */
-  static async loginUsers(req, response) {
+  static async loginUsers(req, res) {
     const { email } = req.body;
     const value = [email];
     try {
@@ -82,7 +81,7 @@ class Users {
             email,
             jobrole
           });
-          return response.status(200).json({
+          return res.status(200).json({
             status: 'success',
             data: {
               username,
@@ -92,13 +91,13 @@ class Users {
             }
           });
         }
-        return response.status(401).json({
+        return res.status(401).json({
           status: 'unauthorized',
           error: 'Either email or password incorrect'
         });
       }
     } catch (error) {
-      response.status(500).json({
+      res.status(500).json({
         status: 500,
         error: error.message
       });
