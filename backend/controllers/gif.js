@@ -2,6 +2,9 @@ import pool from '../database/dbConnection';
 import {
   createGif, deleteOwnGif, createCommentForGifs, getSingleGif, getSingleGifComments
 } from '../database/queries/sql';
+import { uploader } from '../config/cloudinaryConfig';
+import { dataUri } from '../middleware/multer';
+
 
 /**
  * @class Gifs
@@ -18,12 +21,17 @@ class Gifs {
   static async createAGif(req, res) {
     const { id } = req.user;
 
+    const file = dataUri(req).content;
+    const image = await uploader.upload(file);
+
     const values = [
       id,
       req.body.title,
-      req.body.imageUrl];
+      image.secure_url];
+
     try {
       const { rows } = await pool.query(createGif, values);
+
       const {
         gifid, gifownerid, createdon, title, imageurl
       } = rows[0];

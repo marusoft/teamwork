@@ -7,7 +7,6 @@ import userRouter from './routes/user';
 import gifRouter from './routes/gif';
 import articleRouter from './routes/article';
 import feedRouter from './routes/feed';
-import imgRouter from './routes/upload';
 import swaggerDocument from '../Swagger';
 
 const app = express();
@@ -28,7 +27,6 @@ app.use('/api/v1', userRouter);
 app.use('/api/v1', gifRouter);
 app.use('/api/v1', articleRouter);
 app.use('/api/v1', feedRouter);
-app.use('/api/v1', imgRouter);
 
 
 app.get('*', (req, res) => res.status(200).send({

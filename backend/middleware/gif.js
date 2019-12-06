@@ -18,9 +18,10 @@ class GifsValidation {
    */
   static validateGifsDetails(req, res, next) {
     let {
-      title,
-      imageUrl,
+      title
     } = req.body;
+
+    let image = req.file;
 
     if (!title) {
       return res.status(400).json({
@@ -36,14 +37,14 @@ class GifsValidation {
       }
     }
 
-    if (!imageUrl) {
+    if (!image) {
       return res.status(400).json({
         message: 'Please select an gif image to upload.',
       });
     }
-    if (imageUrl) {
+    if (image) {
       let imgExtention;
-      imgExtention = imageUrl.split('.').pop();
+      imgExtention = image.originalname.split('.').pop();
       imgExtention = imgExtention.replace(/'/g, '').trim();
       imgExtention = imgExtention.toLowerCase();
       const validImageExtentions = ['jpg', 'jpeg', 'png', 'gif'];
@@ -55,7 +56,7 @@ class GifsValidation {
     }
 
     req.body.title = title.toLowerCase().trim();
-    req.body.imageUrl = imageUrl;
+    req.body.image = image;
     return next();
   }
 
