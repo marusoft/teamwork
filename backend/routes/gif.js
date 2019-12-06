@@ -3,6 +3,7 @@ import Gifs from '../controllers/gif';
 import GifInputValidation from '../middleware/gif';
 import validateCommentInput from '../middleware/comment';
 import UserAuth from '../middleware/auth';
+import { multerUploads } from '../middleware/multer';
 
 const {
   createAGif, deleteSelfGif, createGifComment, viewSpecificGif
@@ -13,7 +14,7 @@ const { verifyUserToken, isOwner } = UserAuth;
 
 const gifRouter = express.Router();
 
-gifRouter.post('/gifs', verifyUserToken, validateGifsDetails, createAGif);
+gifRouter.post('/gifs', verifyUserToken, multerUploads, validateGifsDetails, createAGif);
 gifRouter.delete('/gifs/:gifId', verifyUserToken, isOwner, validateSpecifyGif, deleteSelfGif);
 gifRouter.post('/gifs/:gifId/comment', verifyUserToken, validateCommentDetails, validateSpecifyGif, createGifComment);
 gifRouter.get('/gifs/:gifId', verifyUserToken, viewSpecificGif);
