@@ -6,7 +6,7 @@
     "description": "Teamwork is an internal social network for employees of an organization. The goal of this application is to facilitate more interaction between colleagues and promote team bonding.\n",
     "contact": {}
   },
-  "host": "localhost:2020",
+  "host": "localhost:3031",
   "basePath": "/api/v1",
   "securityDefinitions": {},
   "schemes": [
@@ -22,11 +22,11 @@
     "/auth/create-user": {
       "post": {
         "description": "Admin can create an employee account",
-        "summary": "Admin can create an employee account.",
+        "summary": "Admin can create an employee user account.",
         "tags": [
           "Admin"
         ],
-        "operationId": "POST/api/v1/auth/create-user",
+        "operationId": "Admincancreateanemployeeuseraccount.",
         "deprecated": false,
         "produces": [
           "application/json"
@@ -124,11 +124,11 @@
     "/auth/signin": {
       "post": {
         "description": "Login a users",
-        "summary": "POST api/v1/auth/signin",
+        "summary": "Admin/Employees can sign in.",
         "tags": [
-          "Employee"
+          "Admin/Employees"
         ],
-        "operationId": "POSTapi/v1/auth/signin",
+        "operationId": "Admin/Employeescansignin.",
         "deprecated": false,
         "produces": [
           "application/json"
@@ -167,53 +167,14 @@
         }
       }
     },
-    "/upload": {
-      "post": {
-        "description": "http://localhost:1515/upload",
-        "summary": "upload gif file to cloudinary",
-        "tags": [
-          "Misc"
-        ],
-        "operationId": "uploadgiffiletocloudinary",
-        "deprecated": false,
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/x-www-form-urlencoded"
-        ],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": false,
-            "default": "Bearer {token}",
-            "type": "string"
-          },
-          {
-            "name": "image",
-            "in": "formData",
-            "required": true,
-            "type": "string",
-            "description": ""
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "headers": {}
-          }
-        }
-      }
-    },
     "/gifs": {
       "post": {
         "description": "http:localhost:3031/api/v1/gifs",
-        "summary": "POST /gifs",
+        "summary": "Employees can post gifs.",
         "tags": [
-          "Misc"
+          "gifs"
         ],
-        "operationId": "POST/gifs",
+        "operationId": "Employeescanpostgifs.",
         "deprecated": false,
         "produces": [
           "application/json"
@@ -244,7 +205,14 @@
             "description": ""
           },
           {
-            "name": "imageUrl",
+            "name": "image",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "category",
             "in": "formData",
             "required": true,
             "type": "string",
@@ -259,14 +227,96 @@
         }
       }
     },
-    "/gifs/<:gifId>": {
+    "DELETE /gifs/{gifId}": {
       "delete": {
         "description": "Employees can delete their gifs",
-        "summary": "DELETE /gifs/<:gifId>",
+        "summary": "Employees can delete their gifs post.",
         "tags": [
-          "Misc"
+          "gifs"
         ],
-        "operationId": "DELETE/gifs/<:gifId>",
+        "operationId": "Employeescandeletetheirgifspost.",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/gifs/{gifId}/comment": {
+      "post": {
+        "description": "Employees can comment on other colleagues' gif post.",
+        "summary": "Employees can comment on other colleagues' gif post.",
+        "tags": [
+          "gifs"
+        ],
+        "operationId": "Employeescancommentonothercolleagues'gifpost.",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "default": "Bearer {token}",
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "comment",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/gifs/{gifId}": {
+      "get": {
+        "description": "Employees can view a specific gif post.",
+        "summary": "Employees can view a specific gif post.",
+        "tags": [
+          "gifs"
+        ],
+        "operationId": "Employeescanviewaspecificgifpost.",
         "deprecated": false,
         "produces": [
           "application/json"
@@ -298,11 +348,11 @@
     "/articles": {
       "post": {
         "description": "POST /articles\nCreate an article",
-        "summary": "POST /articles",
+        "summary": "Employees can write and post articles.",
         "tags": [
-          "Misc"
+          "articles"
         ],
-        "operationId": "POST/articles",
+        "operationId": "Employeescanwriteandpostarticles.",
         "deprecated": false,
         "produces": [
           "application/json"
@@ -334,6 +384,13 @@
           },
           {
             "name": "article",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "category",
             "in": "formData",
             "required": true,
             "type": "string",
@@ -349,11 +406,11 @@
       },
       "get": {
         "description": "view all articles",
-        "summary": "GET /articles",
+        "summary": "View all articles",
         "tags": [
-          "Misc"
+          "articles"
         ],
-        "operationId": "GET/articles",
+        "operationId": "Viewallarticles",
         "deprecated": false,
         "produces": [
           "application/json"
@@ -382,14 +439,14 @@
         }
       }
     },
-    "/articles/<articleId>": {
+    "/articles/{articleId}": {
       "patch": {
         "description": "PATCH /articles/<:articleId>\nEdit an article",
-        "summary": "PATCH /articles/<:articleId>",
+        "summary": "Employees can edit their articles.",
         "tags": [
-          "Misc"
+          "articles"
         ],
-        "operationId": "PATCH/articles/<:articleId>",
+        "operationId": "Employeescanedittheirarticles.",
         "deprecated": false,
         "produces": [
           "application/json"
@@ -425,6 +482,13 @@
             "required": true,
             "type": "string",
             "description": ""
+          },
+          {
+            "name": "category",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "description": ""
           }
         ],
         "responses": {
@@ -435,41 +499,14 @@
         }
       }
     },
-    "/articles/<:articleId>": {
+    "DELETE /articles/{articleId}": {
       "delete": {
         "description": "DELETE /articles/<:articleId>\nEmployees can delete their articles",
-        "summary": "DELETE /articles/<:articleId>",
+        "summary": "Employees can delete their articles.",
         "tags": [
-          "Misc"
+          "articles"
         ],
-        "operationId": "DELETE/articles/<:articleId>",
-        "deprecated": false,
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": false,
-            "default": "Bearer {token}",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "headers": {}
-          }
-        }
-      },
-      "get": {
-        "description": "Employees can view a specific article.",
-        "summary": "GET /articles/<:articleId>",
-        "tags": [
-          "Misc"
-        ],
-        "operationId": "GET/articles/<:articleId>",
+        "operationId": "Employeescandeletetheirarticles.",
         "deprecated": false,
         "produces": [
           "application/json"
@@ -498,14 +535,14 @@
         }
       }
     },
-    "/articles/<:articleId>/comment": {
+    "/articles/{articleId}/comment": {
       "post": {
         "description": "POST /articles/<articleId>/comment\nEmployees can comment on other colleagues' article post.",
-        "summary": "POST /articles/<articleId>/comment",
+        "summary": "Employees can comment on other colleagues' article post.",
         "tags": [
-          "Misc"
+          "articles"
         ],
-        "operationId": "POST/articles/<articleId>/comment",
+        "operationId": "Employeescancommentonothercolleagues'articlepost.",
         "deprecated": false,
         "produces": [
           "application/json"
@@ -544,60 +581,14 @@
         }
       }
     },
-    "/gifs/<:gifId>/comment": {
-      "post": {
-        "description": "Employees can comment on other colleagues' gif post.",
-        "summary": "POST /gifs/<:gifId>/comment",
-        "tags": [
-          "Misc"
-        ],
-        "operationId": "POST/gifs/<:gifId>/comment",
-        "deprecated": false,
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/x-www-form-urlencoded"
-        ],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": false,
-            "default": "Bearer {token}",
-            "type": "string"
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": ""
-          },
-          {
-            "name": "comment",
-            "in": "formData",
-            "required": true,
-            "type": "string",
-            "description": ""
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "headers": {}
-          }
-        }
-      }
-    },
-    "/gifs/<:gifId>": {
+    "GET /articles/{articleId}": {
       "get": {
-        "description": "Employees can view a specific gif post.",
-        "summary": "GET /gifs/<:gifId>",
+        "description": "Employees can view a specific article.",
+        "summary": "Employees can view a specific article.",
         "tags": [
-          "Misc"
+          "articles"
         ],
-        "operationId": "GET/gifs/<:gifId>",
+        "operationId": "Employeescanviewaspecificarticle.",
         "deprecated": false,
         "produces": [
           "application/json"
@@ -629,11 +620,11 @@
     "/feed": {
       "get": {
         "description": "Employees can view all articles or gifs, showing the most recently posted articles\nor gifs first.",
-        "summary": "GET /feed",
+        "summary": "Employees can view all articles and gifs, showing the most recently posted articles or gifs first.",
         "tags": [
-          "Misc"
+          "feed"
         ],
-        "operationId": "GET/feed",
+        "operationId": "Employeescanviewallarticlesandgifs,showingthemostrecentlypostedarticlesorgifsfirst.",
         "deprecated": false,
         "produces": [
           "application/json"
@@ -661,40 +652,11 @@
           }
         }
       }
-    },
-    "/articles?category=category": {
-      "get": {
-        "description": "Employees can view all articles that belong to a category (tag).",
-        "summary": "GET /articles?category=category",
-        "tags": [
-          "Misc"
-        ],
-        "operationId": "GET/articles?category=category",
-        "deprecated": false,
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": false,
-            "default": "Bearer {token}",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "headers": {}
-          }
-        }
-      }
     }
   },
   "tags": [
     {
-      "name": "Misc",
+      "name": "Models",
       "description": ""
     }
   ]

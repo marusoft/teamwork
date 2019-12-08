@@ -68,7 +68,6 @@ describe('Test for gifs Endpoints', () => {
       res.body.should.be.an('object');
       expect(res.body.status).to.equal('success');
       expect(res.body.data.message).to.equal('GIF image successfully posted');
-      console.log('res', res.body);
     });
 
     it('should return 201 and create gifs2', async () => {
