@@ -8,13 +8,13 @@ import { multerUploads } from '../middleware/multer';
 const {
   createAGif, deleteSelfGif, createGifComment, viewSpecificGif
 } = Gifs;
-const { validateGifsDetails, validateSpecifyGif } = GifInputValidation;
+const { validateGifsDetails, validateGifsSize, validateSpecifyGif } = GifInputValidation;
 const { validateCommentDetails } = validateCommentInput;
 const { verifyUserToken, isOwner } = UserAuth;
 
 const gifRouter = express.Router();
 
-gifRouter.post('/gifs', verifyUserToken, multerUploads, validateGifsDetails, createAGif);
+gifRouter.post('/gifs', verifyUserToken, multerUploads, validateGifsDetails, validateGifsSize, createAGif);
 gifRouter.delete('/gifs/:gifId', verifyUserToken, isOwner, validateSpecifyGif, deleteSelfGif);
 gifRouter.post('/gifs/:gifId/comment', verifyUserToken, validateCommentDetails, validateSpecifyGif, createGifComment);
 gifRouter.get('/gifs/:gifId', verifyUserToken, viewSpecificGif);

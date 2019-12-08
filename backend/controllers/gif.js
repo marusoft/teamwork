@@ -27,13 +27,14 @@ class Gifs {
     const values = [
       id,
       req.body.title,
-      image.secure_url];
+      image.secure_url,
+      req.body.category];
 
     try {
       const { rows } = await pool.query(createGif, values);
 
       const {
-        gifid, gifownerid, createdon, title, imageurl
+        gifid, gifownerid, createdon, title, imageurl, category
       } = rows[0];
       return res.status(201).json({
         status: 'success',
@@ -43,7 +44,8 @@ class Gifs {
           gifownerid,
           createdon,
           title,
-          imageurl
+          imageurl,
+          category
         }
       });
     } catch (error) {
@@ -96,7 +98,7 @@ class Gifs {
       const { rows } = await pool.query(createCommentForGifs, values);
       const gifTitle = findSpecificGif.title;
       const {
-        createdon, comment, imageurl
+        createdon, comment, imageurl, category
       } = rows[0];
       return res.status(201).json({
         status: 'success',
@@ -105,6 +107,7 @@ class Gifs {
           createdon,
           gifTitle,
           imageurl,
+          category,
           comment
         }
       });
@@ -136,7 +139,7 @@ class Gifs {
         });
       }
       const {
-        id, createdon, title, imageurl
+        id, createdon, title, imageurl, category
       } = rows[0];
       const foundComment = await pool.query(getSingleGifComments, [value]);
       const comments = foundComment.rows.map((comment) => comment);
@@ -147,6 +150,7 @@ class Gifs {
           createdon,
           title,
           imageurl,
+          category,
           comments
 
         }

@@ -60,6 +60,31 @@ class GifsValidation {
     return next();
   }
 
+
+  /**
+   * validateGifsSize
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @return {object} JSON representing success message
+   * @param {*} next
+   * @memberof Gifs
+   */
+  static async validateGifsSize(req, res, next) {
+    const gifsFileSize = req.file;
+    try {
+      if (gifsFileSize.size <= (1048576 * 3)) {
+        return next();
+      }
+      throw new Error();
+    } catch (error) {
+      return res.status(406).json({
+        status: error,
+        message: 'image size must not be more than 3MB'
+      });
+    }
+  }
+
   /**
    * validateASpecificGif.
    * @static
