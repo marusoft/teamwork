@@ -13,9 +13,9 @@ const addAllsqlTableQueries = `
       VALUES ('marusoft' ,'kehinde', 'alimi', 'alimi@teamwork.com', '${hashedPassword}', 'male', 'admin', 'HR', '3, Olourunosebi street, Oni, Lagos.'),
              ( 'moyo' ,'moyosore', 'omodada', 'moyosore@teamwork.com', '${hashedPassword}', 'female', 'employee', 'Engineering' ,'3,Talomoola Street, ajumobi, Lagos.');
 
-      INSERT INTO gifs(gifownerId, title, imageUrl) 
-      VALUES ( 2, 'cat developer', 'http://res.cloudinary.com/marusofteamwork/image/upload/v1573995345/b2j6f4ascsrvvm76ebje.gif'),
-             ( 1, 'cat developer', 'http://res.cloudinary.com/marusofteamwork/image/upload/v1573995345/b2j6f4ascsrvvm76ebje.gif');
+      INSERT INTO gifs(gifownerId, title, imageUrl, category) 
+      VALUES ( 2, 'cat developer', 'http://res.cloudinary.com/marusofteamwork/image/upload/v1573995345/b2j6f4ascsrvvm76ebje.gif', 'Software'),
+             ( 1, 'cat developer', 'http://res.cloudinary.com/marusofteamwork/image/upload/v1573995345/b2j6f4ascsrvvm76ebje.gif', 'Engineering');
       `;
 
 /**
