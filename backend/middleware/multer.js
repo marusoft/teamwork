@@ -11,5 +11,8 @@ const dUri = new Datauri();
 * @param {Object} req containing the field object
 * @returns {String} The data url from the string buffer
 */
-const dataUri = (req) => dUri.format(path.extname(req.file.originalname).toString(), req.file.buffer);
+const dataUri = (req) => dUri
+  .format(path.extname(req.file.originalname)
+    .toString(), req.file.buffer);
+
 export { multerUploads, dataUri };

@@ -22,9 +22,9 @@
     "/auth/create-user": {
       "post": {
         "description": "Admin can create an employee account",
-        "summary": "POST /api/v1/auth/create-user",
+        "summary": "Admin can create an employee account.",
         "tags": [
-          "Misc"
+          "Admin"
         ],
         "operationId": "POST/api/v1/auth/create-user",
         "deprecated": false,
@@ -126,7 +126,7 @@
         "description": "Login a users",
         "summary": "POST api/v1/auth/signin",
         "tags": [
-          "Misc"
+          "Employee"
         ],
         "operationId": "POSTapi/v1/auth/signin",
         "deprecated": false,
