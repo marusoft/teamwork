@@ -1,10 +1,11 @@
 import chai from 'chai';
+import fs from 'fs';
 import chaiHttp from 'chai-http';
-// import sinon from 'sinon';
 import app from '../app';
-// import pool from '../database/dbConnection';
 
-import { validGifsDetails, invalidGifsDetails } from './mocks/gifs';
+import {
+  gifs1, gifs2, gifs3, invalidGifsDetails
+} from './mocks/gifs';
 
 
 const { should, expect } = chai;
@@ -59,18 +60,25 @@ describe('Test for gifs Endpoints', () => {
       const res = await chai.request(app)
         .post('/api/v1/gifs')
         .set('authorization', `Bearer ${userToken}`)
-        .send(validGifsDetails[0]);
+        .set('content-type', 'multipart/form-data')
+        .field('title', gifs1.title)
+        .attach('image', fs.readFileSync(`${__dirname}/mocks/tenor.gif`), 'mocks/tenor.gif')
+        .field('category', gifs1.category);
       res.should.have.status(201);
       res.body.should.be.an('object');
       expect(res.body.status).to.equal('success');
       expect(res.body.data.message).to.equal('GIF image successfully posted');
+      console.log('res', res.body);
     });
 
     it('should return 201 and create gifs2', async () => {
       const res = await chai.request(app)
         .post('/api/v1/gifs')
         .set('authorization', `Bearer ${userToken}`)
-        .send(validGifsDetails[1]);
+        .set('content-type', 'multipart/form-data')
+        .field('title', gifs2.title)
+        .attach('image', fs.readFileSync(`${__dirname}/mocks/tenor.gif`), 'mocks/tenor.gif')
+        .field('category', gifs2.category);
       res.should.have.status(201);
       res.body.should.be.an('object');
       expect(res.body.status).to.equal('success');
@@ -81,7 +89,10 @@ describe('Test for gifs Endpoints', () => {
       const res = await chai.request(app)
         .post('/api/v1/gifs')
         .set('authorization', `Bearer ${userToken}`)
-        .send(validGifsDetails[1]);
+        .set('content-type', 'multipart/form-data')
+        .field('title', gifs3.title)
+        .attach('image', fs.readFileSync(`${__dirname}/mocks/tenor.gif`), 'mocks/tenor.gif')
+        .field('category', gifs3.category);
       res.should.have.status(201);
       res.body.should.be.an('object');
       expect(res.body.status).to.equal('success');
@@ -125,7 +136,7 @@ describe('Test for gifs Endpoints', () => {
         .send(invalidGifsDetails[3]);
       res.should.have.status(400);
       res.body.should.be.an('object');
-      expect(res.body.message).to.equal('This image is not a valid image.');
+      expect(res.body.message).to.equal('Please select an gif image to upload.');
     });
   });
 });

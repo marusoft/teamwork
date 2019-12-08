@@ -1,13 +1,19 @@
-export const validGifsDetails = [
-  {
-    title: 'Frog the typist',
-    imageUrl: 'http://res.cloudinary.com/marusofteamwork/image/upload/v1573995345/b2j6f4ascsrvvm76ebje.gif'
-  },
-  {
-    title: 'programmer stuff',
-    imageUrl: 'http://res.cloudinary.com/marusofteamwork/image/upload/v1574629948/al2y6efyievlzfjgws17.gif'
-  }
-];
+export const gifs1 = {
+
+  title: 'Frog the typist',
+  category: 'software'
+
+};
+
+export const gifs2 = {
+  title: 'programmer stuff',
+  category: 'Engineering'
+};
+
+export const gifs3 = {
+  title: 'programmer stuff',
+  category: 'Engineering'
+};
 
 export const invalidGifsDetails = [
   {
