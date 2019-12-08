@@ -9,7 +9,7 @@
     "clean": "rm -rf build .nyc_output coverage && mkdir build",
     "start": "npm run build && node ./build/app.js",
     "start:dev": "nodemon --exec babel-node ./backend/app",
-    "test": "cross-env NODE_ENV=test npm run migrate && cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --timeout 2000 ./backend/tests/*.js --require @babel/register --exit",
+    "test": "cross-env NODE_ENV=test npm run migrate && cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --no-timeout ./backend/tests/*.js --require @babel/register --exit",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "migrate": "babel-node ./backend/database/migrations/createTables"
