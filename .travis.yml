@@ -1,41 +1,71 @@
-language: node_js
-node_js:
-  - "stable"
-env:
-global:
-  - export NODE_ENV=test
-dist: trusty
-addons:
-    postgresql: "9.6"
-services:
-  - postgresql
-notifications:
-  email: true
-cache:
-  directories:
-    - node_modules
-before_script:
-  - psql -c 'create database teamwork_db;' -U postgres
-  - npm install
-script: 
-  - npm test
-after_success:
-  - npm run coverage
-  - npm run coveralls
+# language: node_js
+# node_js:
+#   - "stable"
+# env:
+# global:
+#   - export NODE_ENV=test
+# dist: trusty
+# addons:
+#     postgresql: "9.6"
+# services:
+#   - postgresql
+# notifications:
+#   email: true
+# cache:
+#   directories:
+#     - node_modules
+# before_script:
+#   - psql -c 'create database teamwork_db;' -U postgres
+#   - npm install
+# script: 
+#   - npm test
+# after_success:
+#   - npm run coverage
+#   - npm run coveralls
+
+# language: node_js
+# node_js:
+#   - "stable"
+# notifications:
+#   email: false
+# cache:
+#   directories:
+#     - node_modules
+# before_script:
+#   - npm install
+# script: 
+#   - npm run test
+# after_success:
+#   - npm run coverage
+#   - npm run report-coverage
+#   - npm run coveralls
+
 
 language: node_js
 node_js:
   - "stable"
-notifications:
-  email: false
 cache:
   directories:
-    - node_modules
-before_script:
+    - "node_modules"
+install:
   - npm install
-script: 
-  - npm run test
+services:
+  - postgresql
+
+notifications:
+  email: true
+
+env:
+  global:
+  - NODE_ENV=test
+addons:
+    postgresql: "9.6"
+    
+before_script:
+  - psql -c 'create database teamwork_db;' -U postgres
+  - npm install
+  - npm run build
+script:
+  - npm test
 after_success:
   - npm run coverage
-  - npm run report-coverage
-  - npm run coveralls
