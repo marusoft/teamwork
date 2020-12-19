@@ -1,4 +1,6 @@
+sudo: required
 language: node_js
+cache: bundler
 node_js:
   - "stable"
 env:
