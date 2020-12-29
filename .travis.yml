@@ -12,9 +12,6 @@ services:
   - postgresql
 notifications:
   email: true
-# cache:
-#   directories:
-#     - node_modules
 before_script:
   - psql -c 'create database teamwork_db;' -U postgres
   - npm install

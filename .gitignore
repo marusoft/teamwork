@@ -1,9 +1,11 @@
 node_modules/
 
 build/
+
 .env
 
 coverage
+
 .nyc_output
 
 *.txt
