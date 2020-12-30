@@ -4,24 +4,37 @@ node_js:
 env:
 global:
   - export NODE_ENV=test
-dist: focal
-group: dev
-sudo: false
+dist: trusty
 addons:
-  postgresql: "10"
-  # apt:
-  #   packages:
-  #   - postgresql-client-10
-  #   - postgresql-contrib-10
+    postgresql: "9.6"
 services:
   - postgresql
 notifications:
   email: true
+cache:
+  directories:
+    - node_modules
 before_script:
-  - psql -c 'create database teamwork_test;' -U postgres
+  - psql -c 'create database teamwork_db;' -U postgres
   - npm install
 script: 
   - npm test
+after_success:
+  - npm run coverage
+  - npm run coveralls
+
+language: node_js
+node_js:
+  - "stable"
+notifications:
+  email: false
+cache:
+  directories:
+    - node_modules
+before_script:
+  - npm install
+script: 
+  - npm run test
 after_success:
   - npm run coverage
   - npm run report-coverage
