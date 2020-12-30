@@ -1,4 +1,3 @@
-sudo: required
 language: node_js
 node_js:
   - "stable"
@@ -7,13 +6,13 @@ global:
   - export NODE_ENV=test
 dist: focal
 addons:
-    postgresql: "9.6"
+    postgresql: "12.2"
 services:
   - postgresql
 notifications:
   email: true
 before_script:
-  - psql -c 'create database teamwork_db;' -U postgres
+  - psql -c 'create database teamwork_test;' -U postgres
   - npm install
 script: 
   - npm test
