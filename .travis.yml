@@ -6,7 +6,11 @@ global:
   - export NODE_ENV=test
 dist: focal
 addons:
-    postgresql: "12.2"
+  postgresql: "10"
+  apt:
+    packages:
+    - postgresql-10
+    - postgresql-client-10
 services:
   - postgresql
 notifications:
