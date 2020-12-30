@@ -9,10 +9,10 @@ group: dev
 sudo: false
 addons:
   postgresql: "10"
-  apt:
-    packages:
-    - postgresql-client-10
-    - postgresql-contrib-10
+  # apt:
+  #   packages:
+  #   - postgresql-client-10
+  #   - postgresql-contrib-10
 services:
   - postgresql
 notifications:
