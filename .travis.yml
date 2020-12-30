@@ -4,7 +4,7 @@ node_js:
 env:
 global:
   - export NODE_ENV=test
-dist: trusty
+dist: focal
 addons:
     postgresql: "9.6"
 services:
