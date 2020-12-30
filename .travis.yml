@@ -4,7 +4,9 @@ node_js:
 env:
 global:
   - export NODE_ENV=test
-dist: focal
+dist: bionic
+group: dev
+sudo: false
 addons:
   postgresql: "10"
   apt:
