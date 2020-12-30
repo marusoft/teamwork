@@ -4,7 +4,7 @@ node_js:
 env:
 global:
   - export NODE_ENV=test
-dist: bionic
+dist: focal
 group: dev
 sudo: false
 addons:
