@@ -4,7 +4,7 @@ node_js:
 env:
 global:
   - export NODE_ENV=test
-dist: focal
+dist: trusty
 addons:
     postgresql: "9.6"
 services:
@@ -18,7 +18,7 @@ before_script:
   - psql -c 'create database teamwork_db;' -U postgres
   - npm install
 script: 
-  - npm test
+  - travis_wait 20 npm test
 after_success:
   - npm run coverage
   - npm run report-coverage
