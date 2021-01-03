@@ -17,7 +17,7 @@ cache:
 before_script:
   - psql -c 'create database teamwork_db;' -U postgres
   - npm install
-- install:
+install:
     # Output something every 10 minutes or Travis kills the job
     - while sleep 9m; do echo "=====[ $SECONDS seconds still running ]====="; done &
     - long-living-command
