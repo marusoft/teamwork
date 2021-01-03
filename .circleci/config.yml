@@ -42,15 +42,35 @@
 #       environment:
 #           DATABASE_URL: "postgres://ubuntu@localhost:5432/db_name"
 
-
-
 version: 2
 jobs:
   build:
     docker:
       - image: circleci/node:10.16.3
-  
+      - image: circleci/postgres:9.6-alpine  
+        environment:
+           SALT: process.env.SALT
+           PORT: process.env.PORT
+           SECRET_KEY: process.env.SECRET_KEY
+           PG_HOST: localhost
+           POSTGRES_USER: postgres
+           POSTGRES_PASS: Kehinde
+           POSTGRES_DB: process.env.TEST_DATABASE_URL
+           CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME
+           CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY
+           CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET
+           PASSWORD: process.env.PASSWORSD
+
     steps:
       - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
       - run: npm install
+
+      - save_cache:
+         key: dependency-cache-{{ checksum "package-lock.json" }}
+         paths:
+             - ./node_modules     
       - run: npm test
+        environment:
+          DATABASE_URL=postgres://postgres:Kehinde@127.0.0.1:5432/teamwork_db
