@@ -24,7 +24,19 @@ before_script:
 install:
     # Output something every 10 minutes or Travis kills the job
     - while sleep 9m; do echo "=====[ $SECONDS seconds still running ]====="; done &
-    - long-living-command
+    - minutes=0
+  limit=30
+  while kill -0 $! >/dev/null 2>&1; do
+    echo -n -e " \b" # never leave evidences!
+
+    if [ $minutes == $limit ]; then
+      break;
+    fi
+
+    minutes=$((minutes+1))
+
+    sleep 60
+  done
     # Killing background sleep loop
     - kill %1 
 script: 
