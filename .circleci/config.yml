@@ -49,17 +49,11 @@ jobs:
       - image: circleci/node:10.16.3
       - image: circleci/postgres:9.6-alpine  
         environment:
-           SALT: process.env.SALT
-           PORT: process.env.PORT
-           SECRET_KEY: process.env.SECRET_KEY
-           PG_HOST: localhost
-           POSTGRES_USER: postgres
-           POSTGRES_PASS: Kehinde
-           POSTGRES_DB: process.env.TEST_DATABASE_URL
-           CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME
-           CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY
-           CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET
-           PASSWORD: process.env.PASSWORSD
+           host: localhost
+           port: 5432
+           db_username: postgres
+           db_password: Kehinde
+           db_name: teamwork_test
 
     steps:
       - checkout
