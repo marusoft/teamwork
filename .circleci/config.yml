@@ -67,12 +67,14 @@ jobs:
           paths:
             - ./node_modules
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
-      - run: npm start validate.withCoverage
-      - run: npm start reportCoverage
+      - run: npm test
+      - run: npm coverage
+      - run: npm report-coverage
+      - run: npm report-coveralls
       - store_artifacts:
           path: ./coverage/clover.xml
           prefix: tests
       - store_artifacts:
           path: coverage
           prefix: coverage
-      - run: npm test
+      
