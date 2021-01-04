@@ -1,4 +1,7 @@
 [![Build Status](https://travis-ci.org/marusoft/teamwork.svg?branch=develop)](https://travis-ci.org/marusoft/teamwork)
+
+[![CircleCI](https://circleci.com/gh/marusoft/teamwork.svg?style=svg)](https://circleci.com/gh/marusoft/teamwork)
+
 [![Coverage Status](https://coveralls.io/repos/github/marusoft/teamwork/badge.svg?branch=develop)](https://coveralls.io/github/marusoft/teamwork?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/0e4a41f2688d3888090a/maintainability)](https://codeclimate.com/github/marusoft/teamwork/maintainability)
 
