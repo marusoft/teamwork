@@ -46,10 +46,10 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:10.16.3
       - image: circleci/postgres:9.6-alpine
         environment:
-          PG_HOST: localhost
+          PG_HOST: 127.0.0.1
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: Kehinde
           POSTGRES_DB: teamwork_test
@@ -65,5 +65,5 @@ jobs:
           paths:
             - ./node_modules
       - run: npm test
-          environment: 
-            DATABASE_URL: "postgres://postgres:Kehinde@127.0.0.1:5432/teamwork_test"
+          # environment: 
+          #   DATABASE_URL: "postgres://postgres:Kehinde@127.0.0.1:5432/teamwork_test"
