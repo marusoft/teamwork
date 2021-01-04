@@ -65,5 +65,5 @@ jobs:
           paths:
             - ./node_modules
       - run: npm test
-          environment: 
-            DATABASE_URL: "postgres://postgres:Kehinde@127.0.0.1:5432/teamwork_test"
+          # environment: 
+          #   DATABASE_URL: "postgres://postgres:Kehinde@127.0.0.1:5432/teamwork_test"
