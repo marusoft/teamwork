@@ -1,47 +1,7 @@
-# version: 2.1
-
-# workflows:
-#   version: 2
-#   build:
-#     jobs:
-#       - build
-
-# jobs:
-#   build:
-#     working_directory: ~/teamwork
-#     docker:
-#       - image: circleci/node:4.8.2 # Primary execution image
-#         auth:
-#           username: mydockerhub-user
-#           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-#       - image: circleci/postgres:9.6-alpine        # Service/dependency image
-#         auth:
-#           username: mydockerhub-user
-#           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-#         environment:
-#           PG_HOST: localhost
-#           POSTGRES_USER: postgres
-#           POSTGRES_DB: teamwork_test
-#     steps:
-#       - checkout
-#       - run:
-#           name: update-npm
-#           command: 'sudo npm install -g npm@5'
-#       - restore_cache:
-#           key: dependency-cache-{{ checksum "package-lock.json" }}
-#       - run:
-#           name: install-npm-wee
-#           command: npm install
-#       - save_cache:
-#           key: dependency-cache-{{ checksum "package-lock.json" }}
-#           paths:
-#             - ./node_modules
-#       - run:
-#           name: test
-#           command: npm test
-#       environment:
-#           DATABASE_URL: "postgres://ubuntu@localhost:5432/db_name"
-
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
 version: 2
 jobs:
   build:
@@ -58,22 +18,16 @@ jobs:
           POSTGRES_USER: postgres
     steps:
       - checkout
+      # Download and cache dependencies
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run: npm install
-
+      # fallback to using the latest cache if no exact match is found
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
+      # Wait for Postgres connection to open.
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run: npm test
-      - run: npm start validate.withCoverage
-      - run: npm start reportCoverage
-      - store_artifacts:
-          path: ./coverage/clover.xml
-          prefix: tests
-      - store_artifacts:
-          path: coverage
-          prefix: coverage
-      
+  
