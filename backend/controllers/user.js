@@ -1,7 +1,9 @@
 /* eslint-disable no-shadow */
 import Helper from '../helperUtils/Utils';
 import pool from '../database/dbConnection';
-import { createUser, findIfUserExist } from '../database/queries/sql';
+import {
+  createUser, findIfUserExist, findUser, findAllUser
+} from '../database/queries/sql';
 
 /**
  * @class Users
@@ -18,20 +20,37 @@ class Users {
    */
   static async createUsers(req, res) {
     const {
-      username, firstName, lastName, email, password, gender, jobRole, department, address,
+      username,
+      firstname,
+      lastname,
+      email,
+      password,
+      gender,
+      jobrole,
+      department,
+      address,
     } = req.body;
     const hashedPassword = Helper.hashPassword(password);
-    const values = [username, firstName, lastName, email, hashedPassword, gender, jobRole,
-      department, address];
+    const values = [
+      username,
+      firstname,
+      lastname,
+      email,
+      hashedPassword,
+      gender,
+      jobrole,
+      department,
+      address,
+    ];
     try {
       const { rows } = await pool.query(createUser, values);
       const { id } = rows[0];
       const token = Helper.generateToken({
         id,
         username,
-        firstName,
-        lastName,
-        email
+        firstname,
+        lastname,
+        email,
       });
       return res.status(201).json({
         status: 'success',
@@ -39,12 +58,12 @@ class Users {
           username,
           message: 'Account successfully created',
           token,
-          id
-        }
+          id,
+        },
       });
     } catch (error) {
       return res.status(500).json({
-        error: error.message
+        error: error.message,
       });
     }
   }
@@ -64,22 +83,21 @@ class Users {
     try {
       const { rows } = await pool.query(findIfUserExist, value);
       if (rows[0]) {
-        const validPassword = Helper.verifyPassword(rows[0].password, req.body.password);
+        const validPassword = Helper.verifyPassword(
+          rows[0].password,
+          req.body.password
+        );
         if (validPassword) {
           const {
-            id,
-            username,
-            firstName,
-            lastName,
-            jobrole
+            id, username, firstname, lastname, jobrole
           } = rows[0];
           const token = Helper.generateToken({
             id,
             username,
-            firstName,
-            lastName,
+            firstname,
+            lastname,
             email,
-            jobrole
+            jobrole,
           });
           return res.status(200).json({
             status: 'success',
@@ -87,19 +105,111 @@ class Users {
               username,
               message: 'Welcome back your login was successful',
               token,
-              id
-            }
+              id,
+            },
           });
         }
         return res.status(401).json({
           status: 'unauthorized',
-          error: 'Either email or password incorrect'
+          error: 'Either email or password incorrect',
         });
       }
     } catch (error) {
       res.status(500).json({
         status: 500,
-        error: error.message
+        error: error.message,
+      });
+    }
+  }
+
+  /**
+   * fetch a Login user
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @return {object} JSON representing success message
+   * @memberof Users
+   */
+  static async fetchLoggedInUser(req, res) {
+    try {
+      const value = [req.user.id];
+      const { rows } = await pool.query(findUser, value);
+      const {
+        id, username, firstname, lastname, jobrole
+      } = rows[0];
+      return res.status(200).json({
+        status: 'success',
+        data: {
+          id,
+          username,
+          firstname,
+          lastname,
+          jobrole,
+        },
+      });
+    } catch (error) {
+      res.status(500).json({
+        status: 500,
+        error: error.message,
+      });
+    }
+  }
+
+  /**
+   * fetch a user
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @return {object} JSON representing success message
+   * @memberof Users
+   */
+  static async fetchAUser(req, res) {
+    try {
+      const value = [req.params.id];
+      const { rows } = await pool.query(findUser, value);
+      const {
+        id, username, email, firstname, lastname, jobrole
+      } = rows[0];
+      return res.status(200).json({
+        status: 'success',
+        data: {
+          id,
+          username,
+          email,
+          firstname,
+          lastname,
+          jobrole,
+        },
+      });
+    } catch (error) {
+      res.status(500).json({
+        status: 500,
+        error: error.message,
+      });
+    }
+  }
+
+  /**
+   * fetch all user
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @return {object} JSON representing success message
+   * @memberof Users
+   */
+  static async fetchAllUser(req, res) {
+    try {
+      const { rows } = await pool.query(findAllUser);
+      return res.status(200).json({
+        status: 'success',
+        data: {
+          rows,
+        },
+      });
+    } catch (error) {
+      res.status(500).json({
+        status: 500,
+        error: error.message,
       });
     }
   }
