@@ -1,7 +1,10 @@
 // USERS
-export const createUser = 'INSERT INTO users (username, firstName, lastName, email, password, gender, jobRole, department, address) values ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *';
+export const createUser = 'INSERT INTO users (username, firstname, lastname, email, password, gender, jobrole, department, address) values ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *';
 export const findEmail = 'SELECT * FROM users WHERE email = $1';
 export const findIfUserExist = 'SELECT * FROM users WHERE email = $1';
+export const findUser = 'SELECT * FROM users WHERE id = $1';
+export const findAllUser = `SELECT id, username firstName, lastName, gender, department, address, email FROM users 
+`;
 
 // GIFS
 export const createGif = 'INSERT INTO gifs (gifOwnerId, title, imageUrl, category) values ($1, $2, $3, $4) returning *';
