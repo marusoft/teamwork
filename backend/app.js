@@ -30,7 +30,7 @@ app.use('/api/v1', feedRouter);
 
 
 app.get('*', (req, res) => res.status(200).send({
-  message: 'Welcome to teamwork-app, a place where beautiful things can be achieved through collaboration',
+  message: 'Welcome to teamwork-app, a place where beautiful things can be achieved through collaboration and teamwork',
 }));
 
 
