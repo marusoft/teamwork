@@ -13,5 +13,6 @@ backend/controllers/dist
 backend/database/queries/dist/
 backend/middleware/dist
 backend/routes/dist
+backend/database/seeders/dist/
 
 .vscode/
