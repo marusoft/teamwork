@@ -6,12 +6,12 @@ DROP TABLE IF EXISTS users CASCADE;
   CREATE TABLE IF NOT EXISTS users( 
     id SERIAL PRIMARY KEY NOT NULL,
     username VARCHAR(128) NOT NULL,
-    firstName VARCHAR(128) NOT NULL,
-    lastName VARCHAR(128) NOT NULL,
+    firstname VARCHAR(128) NOT NULL,
+    lastname VARCHAR(128) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password TEXT NOT NULL,
     gender VARCHAR(90) NOT NULL DEFAULT 'male',
-    jobRole VARCHAR(100) NOT NULL DEFAULT 'admin',
+    jobrole VARCHAR(100) NOT NULL DEFAULT 'admin',
     department VARCHAR(128) NOT NULL,
     address VARCHAR(128) NOT NULL
   )`;

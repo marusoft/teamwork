@@ -14,19 +14,19 @@ class UsersValidation {
    */
   static async ValidateCreateUserInput(req, res, next) {
     const {
-      username, firstName, lastName, password, gender, jobRole, department, address,
+      username, firstname, lastname, password, gender, jobrole, department, address,
     } = req.body;
 
     let { email } = req.body;
 
     const constraint = {
       username: 'required|min:3|max:20|alpha_num',
-      firstName: 'required|min:3|max:20|alpha',
-      lastName: 'required|min:3|max:20|alpha',
+      firstname: 'required|min:3|max:20|alpha',
+      lastname: 'required|min:3|max:20|alpha',
       email: 'required|email|min:12|max:30',
       password: 'required|min:8|max:14',
       gender: 'required|alpha',
-      jobRole: 'required|min:4|max:10|alpha',
+      jobrole: 'required|min:4|max:10|alpha',
       department: 'required|min:8|max:20|alpha',
       address: 'required|string',
     };
@@ -56,11 +56,11 @@ class UsersValidation {
 
     req.body.email = email;
     req.body.username = username.toLowerCase().trim();
-    req.body.firstName = firstName.toLowerCase().trim();
-    req.body.lastName = lastName.toLowerCase().trim();
+    req.body.firstname = firstname.toLowerCase().trim();
+    req.body.lastname = lastname.toLowerCase().trim();
     req.body.password = password.trim();
     req.body.gender = gender.trim();
-    req.body.jobRole = jobRole.trim();
+    req.body.jobrole = jobrole.trim();
     req.body.department = department.trim();
     req.body.address = address.trim();
     return next();

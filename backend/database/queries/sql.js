@@ -3,7 +3,7 @@ export const createUser = 'INSERT INTO users (username, firstname, lastname, ema
 export const findEmail = 'SELECT * FROM users WHERE email = $1';
 export const findIfUserExist = 'SELECT * FROM users WHERE email = $1';
 export const findUser = 'SELECT * FROM users WHERE id = $1';
-export const findAllUser = `SELECT id, username firstName, lastName, gender, department, address, email FROM users 
+export const findAllUser = `SELECT id, username firstname, lastname, gender, department, address, email FROM users 
 `;
 
 // GIFS
