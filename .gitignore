@@ -9,11 +9,11 @@ coverage
 .nyc_output
 
 *.txt
-backend/controllers/dist
 backend/database/queries/dist/
+backend/database/seeders/dist/
+backend/controllers/dist
 backend/middleware/dist
 backend/routes/dist
 backend/dist
-backend/database/seeders/dist/
 
 .vscode/
