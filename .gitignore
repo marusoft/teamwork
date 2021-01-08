@@ -8,7 +8,6 @@ coverage
 
 .nyc_output
 
-*.txt
 backend/database/queries/dist/
 backend/database/seeders/dist/
 backend/controllers/dist

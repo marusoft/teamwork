@@ -1,0 +1,5 @@
+# updating local db changes to heroku
+git push heroku your_local_branch_name:master
+heroku run npm run migrate
+# updating local changes to heroku
+git push heroku develop:master
