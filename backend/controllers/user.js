@@ -31,7 +31,7 @@ class Users {
       department,
       address,
     } = req.body;
-    console.log(req.body);
+    conso
     const hashedPassword = Helper.hashPassword(password);
     const values = [
       username,
