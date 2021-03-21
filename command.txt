@@ -3,3 +3,6 @@ git push heroku your_local_branch_name:master
 heroku run npm run migrate
 # updating local changes to heroku
 git push heroku develop:master
+// To login to heroku pg psql db
+heroku pg:psql
+then using all sql queries associated with postgreSQL
