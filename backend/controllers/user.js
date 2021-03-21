@@ -19,6 +19,7 @@ class Users {
    * @memberof Users
    */
   static async createUsers(req, res) {
+    console.log(req.body);
     const {
       username,
       firstname,
@@ -30,6 +31,7 @@ class Users {
       department,
       address,
     } = req.body;
+    console.log(req.body);
     const hashedPassword = Helper.hashPassword(password);
     const values = [
       username,

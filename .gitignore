@@ -16,3 +16,4 @@ backend/routes/dist
 backend/dist
 
 .vscode/
+backend/database/dist/
