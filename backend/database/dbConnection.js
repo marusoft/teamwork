@@ -8,12 +8,12 @@ let connect;
 if (process.env.NODE_ENV === 'test') {
   connect = {
     connectionString: process.env.TEST_DATABASE_URL,
-    ssl: true
+    ssl: { rejectUnauthorized: true }
   };
 }
 connect = {
   connectionString: process.env.DATABASE_URL,
-  ssl: true,
+  ssl: { rejectUnauthorized: true }
 };
 
 const pool = new Pool(connect);
