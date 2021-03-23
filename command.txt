@@ -5,6 +5,7 @@ heroku run npm run migrate
 git push heroku develop:master
 // To login to heroku pg psql db
 heroku pg:psql
+
 then using all sql queries associated with postgreSQL
 // babel-node not found
 heroku config:set NPM_CONFIG_PRODUCTION=false
