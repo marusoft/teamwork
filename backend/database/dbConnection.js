@@ -8,6 +8,9 @@ let connect;
 if (process.env.NODE_ENV === 'test') {
   connect = {
     connectionString: process.env.TEST_DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: true
+    }
   };
 }
 connect = {
