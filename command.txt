@@ -1,11 +1,16 @@
 # updating local db changes to heroku
-git push heroku your_local_branch_name:master
-heroku run npm run migrate
+$ git push heroku your_local_branch_name:master
+$ heroku addons:create heroku-postgresql:hobby-dev
+$ heroku run npm run migrate
 # updating local changes to heroku
-git push heroku develop:master
+$ git push heroku develop:master
 // To login to heroku pg psql db
-heroku pg:psql
+$ heroku pg:psql
+// babel-node not found
+$ heroku config:set NPM_CONFIG_PRODUCTION=false
 
 then using all sql queries associated with postgreSQL
-// babel-node not found
-heroku config:set NPM_CONFIG_PRODUCTION=false
+\d tablename
+
+
+https://teamwork-frontend.herokuapp.com/
