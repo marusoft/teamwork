@@ -8,12 +8,12 @@ let connect;
 if (process.env.NODE_ENV === 'test') {
   connect = {
     connectionString: process.env.TEST_DATABASE_URL,
-    idleTimeoutMillis: 30000,
+    ssl: true
   };
 }
 connect = {
   connectionString: process.env.DATABASE_URL,
-  idleTimeoutMillis: 30000,
+  ssl: true,
 };
 
 const pool = new Pool(connect);
