@@ -166,16 +166,16 @@ class Users {
   static async fetchAUser(req, res) {
     try {
       const value = [req.params.id];
-      const { rows } = await pool.query(findUser, value);
+      const { rows, rowCount } = await pool.query(findUser, value);
+      if (rowCount === 0) {
+        return res.status(404).json({
+          status: 404,
+          error: 'Cannot find the specify article.',
+        });
+      }
       const {
         id, username, email, firstname, lastname, jobrole
       } = rows[0];
-      if (!rows[0]) {
-        return res.status(404).json({
-          status: 'error',
-          message: `User with the specify ${id} cannot be found`
-        });
-      }
       return res.status(200).json({
         status: 'success',
         data: {
