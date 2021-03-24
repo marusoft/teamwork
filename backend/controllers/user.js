@@ -167,10 +167,11 @@ class Users {
     try {
       const value = [req.params.id];
       const { rows, rowCount } = await pool.query(findUser, value);
+      console.log(rowCount);
       if (rowCount === 0) {
         return res.status(404).json({
           status: 404,
-          error: 'Cannot find the specify article.',
+          error: 'Cannot find User with the specify id.',
         });
       }
       const {
