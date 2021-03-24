@@ -1,8 +1,6 @@
 import 'dotenv/config';
 import { Pool } from 'pg';
 
-console.log('process.env.NODE_ENV', process.env.NODE_ENV);
-
 let connect;
 
 if (process.env.NODE_ENV === 'test') {
