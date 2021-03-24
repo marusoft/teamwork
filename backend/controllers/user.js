@@ -133,7 +133,6 @@ class Users {
   static async fetchLoggedInUser(req, res) {
     try {
       const value = [req.user.id];
-      console.log('ID', value);
       const { rows } = await pool.query(findUser, value);
       const {
         id, username, firstname, lastname, jobrole
@@ -167,7 +166,6 @@ class Users {
   static async fetchAUser(req, res) {
     try {
       const value = [req.params.id];
-      console.log('VALUE1', value);
       const { rows } = await pool.query(findUser, value);
       const {
         id, username, email, firstname, lastname, jobrole

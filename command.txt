@@ -12,5 +12,6 @@ $ heroku config:set NPM_CONFIG_PRODUCTION=false
 then using all sql queries associated with postgreSQL
 \d tablename
 
-
+how to rename an app on herokuapp
+$ heroku apps:rename {newname}
     https://teamwork-frontend.herokuapp.com/
