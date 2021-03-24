@@ -14,4 +14,4 @@ then using all sql queries associated with postgreSQL
 
 how to rename an app on herokuapp
 $ heroku apps:rename {newname}
-    https://teamwork-frontend.herokuapp.com/
+https://teamworkapps-backend.herokuapp.com/
