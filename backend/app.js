@@ -12,6 +12,11 @@ import swaggerDocument from '../Swagger';
 const app = express();
 const port = parseInt(process.env.PORT, 10) || 2020;
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(logger('dev'));
