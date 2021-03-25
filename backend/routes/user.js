@@ -13,7 +13,7 @@ const { isAdmin, verifyUserToken } = UserAuth;
 const userRouter = express.Router();
 
 
-userRouter.post('/auth/create-user', isAdmin, ValidateCreateUserInput, createUsers);
+userRouter.post('/auth/create-user', ValidateCreateUserInput, createUsers);
 userRouter.post('/auth/signin', ValidateUserLoginInInput, loginUsers);
 userRouter.get('/auth/signin-user', verifyUserToken, fetchLoggedInUser);
 userRouter.get('/auth/users', verifyUserToken, isAdmin, fetchAllUser);
