@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import swaggerUi from 'swagger-ui-express';
@@ -12,11 +13,6 @@ import swaggerDocument from '../Swagger';
 const app = express();
 const port = parseInt(process.env.PORT, 10) || 2020;
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
-
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(logger('dev'));
@@ -25,6 +21,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false,
 }));
+
+app.use(cors());
 
 app.use('*', cloudinaryConfig);
 
