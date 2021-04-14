@@ -57,7 +57,7 @@ class Users {
         data: {
           username,
           message: 'Account successfully created',
-          token,
+          token: `Bearer ${token}`,
           id,
         },
       });
@@ -104,7 +104,7 @@ class Users {
             data: {
               username,
               message: 'Welcome back your login was successful',
-              token,
+              token: `Bearer ${token}`,
               id,
             },
           });
@@ -167,7 +167,6 @@ class Users {
     try {
       const value = [req.params.id];
       const { rows, rowCount } = await pool.query(findUser, value);
-      console.log(rowCount);
       if (rowCount === 0) {
         return res.status(404).json({
           status: 404,
